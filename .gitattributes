@@ -1,0 +1,16 @@
+# Normalize line endings: store text as LF in the repo, auto-handle on checkout.
+* text=auto eol=lf
+
+# Treat binary assets as binary (no line-ending conversion / diffs).
+*.png   binary
+*.jpg   binary
+*.jpeg  binary
+*.webp  binary
+*.gif   binary
+*.ico   binary
+*.svg   text
+*.mp4   binary
+*.mov   binary
+*.webm  binary
+*.woff  binary
+*.woff2 binary
