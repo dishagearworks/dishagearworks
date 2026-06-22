@@ -130,18 +130,16 @@ h1, h2, h3, h4, h5, h6 {
   will-change: opacity;
 }
 
-/* ── JS-INDEPENDENT ENTRANCE REVEAL ──────────────────────────────────────
-   Content is visible by default. The fade/slide-up is applied purely via
-   CSS, so it works even if JavaScript fails to run (older phones, in-app
-   browsers, data-saver). If it animated and JS never fires, the element
-   still ends fully visible — it can never get "stuck" hidden. */
+/* ── ENTRANCE REVEAL — TRANSFORM ONLY (never hides content) ───────────────
+   Content's resting opacity is always 1. The reveal is a pure transform
+   slide, so even if the animation never runs or gets stuck (e.g. iOS Safari
+   holding an animation's start state, JS disabled, in-app browsers), the
+   element is ALWAYS visible. No opacity:0 is used anywhere. */
 @keyframes hl-rise {
   from {
-    opacity: 0;
-    transform: translateY(22px);
+    transform: translateY(20px);
   }
   to {
-    opacity: 1;
     transform: translateY(0);
   }
 }
@@ -162,14 +160,13 @@ h1, h2, h3, h4, h5, h6 {
   .reveal-stagger > *:nth-child(8) { animation-delay: 0.46s; }
 }
 
-/* JS-independent page-transition fade (used by app/template.tsx). */
+/* Page-transition (used by app/template.tsx) — transform only, no opacity,
+   so a page can never render blank if the animation gets stuck. */
 @keyframes hl-fade {
   from {
-    opacity: 0;
     transform: translateY(8px);
   }
   to {
-    opacity: 1;
     transform: translateY(0);
   }
 }
