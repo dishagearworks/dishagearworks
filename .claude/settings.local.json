@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(npm install)",
+      "PowerShell(try { $r = Invoke-WebRequest -Uri http://localhost:3000 -UseBasicParsing -TimeoutSec 30; \"Status: $\\($r.StatusCode\\)\" } catch { \"Error: $_\" })",
+      "PowerShell(Get-NetTCPConnection -LocalPort 3000 -State Listen -ErrorAction SilentlyContinue | Select-Object -ExpandProperty OwningProcess -Unique | ForEach-Object { try { Stop-Process -Id $_ -Force -ErrorAction Stop; \"Stopped PID $_\" } catch {} }; \"done\")",
+      "mcp__Claude_Preview__preview_start",
+      "Bash(find /c/Users/lenovo/AppData/Local/Temp /c/Users/lenovo/Downloads -maxdepth 3 -type f \\\\\\( -iname \"*.png\" -o -iname \"*.jpg\" -o -iname \"*.jpeg\" -o -iname \"*.webp\" \\\\\\) -newermt \"-2 hours\" 2>/dev/null | head -50)",
+      "Bash(python -c ' *)",
+      "Bash(mkdir -p /c/Users/lenovo/.claude/skills/frontend-design)",
+      "Bash(curl -sf https://raw.githubusercontent.com/anthropics/skills/main/skills/frontend-design/SKILL.md -o /c/Users/lenovo/.claude/skills/frontend-design/SKILL.md)",
+      "Bash(curl -sf https://raw.githubusercontent.com/anthropics/skills/main/skills/frontend-design/LICENSE.txt -o /c/Users/lenovo/.claude/skills/frontend-design/LICENSE.txt)",
+      "Read(//c/Users/lenovo/.claude/skills/**)",
+      "Bash(curl -s \"https://api.github.com/repos/nextlevelbuilder/ui-ux-pro-max-skill/contents/\")",
+      "Bash(curl -s \"https://api.github.com/repos/nextlevelbuilder/ui-ux-pro-max-skill/contents/.claude-plugin\")",
+      "Bash(curl -s \"https://api.github.com/repos/nextlevelbuilder/ui-ux-pro-max-skill/contents/.claude\")",
+      "Bash(curl -s \"https://raw.githubusercontent.com/nextlevelbuilder/ui-ux-pro-max-skill/main/skill.json\")",
+      "Bash(python scripts/search.py \"industrial manufacturing CNC machining precision engineering agricultural B2B premium\" --design-system -p \"DISHA GEARWORKS\")"
+    ]
+  }
+}

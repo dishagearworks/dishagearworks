@@ -1,0 +1,160 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #0b1220;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-navy text-white font-body antialiased;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Headings default to the heading font, tightened tracking for a precise feel */
+h1, h2, h3, h4, h5, h6 {
+  @apply font-heading;
+  letter-spacing: -0.02em;
+}
+
+/* Reusable layout container */
+@layer components {
+  .container-x {
+    @apply mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-10;
+  }
+
+  /* Industrial blueprint grid background for placeholders */
+  .blueprint {
+    background-color: #0f1a30;
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    background-size: 22px 22px;
+  }
+
+  .text-gradient-orange {
+    @apply bg-orange-gradient bg-clip-text text-transparent;
+  }
+
+  /* Engineering-style mono label / eyebrow (uppercase, tracked) */
+  .label-mono {
+    @apply font-mono text-[11px] font-medium uppercase tracking-[0.28em];
+  }
+
+  /* Hairline blueprint grid overlay for dark sections */
+  .grid-lines {
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+    background-size: 56px 56px;
+  }
+
+  /* Subtle hairline grid for light sections */
+  .grid-lines-light {
+    background-image:
+      linear-gradient(rgba(11, 18, 32, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(11, 18, 32, 0.04) 1px, transparent 1px);
+    background-size: 56px 56px;
+  }
+
+  /* Corner tick marks (engineering-drawing detail) */
+  .corner-ticks::before,
+  .corner-ticks::after {
+    content: "";
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    border-color: rgba(201, 116, 58, 0.7);
+    pointer-events: none;
+  }
+  .corner-ticks::before {
+    top: 0;
+    left: 0;
+    border-top: 1px solid;
+    border-left: 1px solid;
+  }
+  .corner-ticks::after {
+    bottom: 0;
+    right: 0;
+    border-bottom: 1px solid;
+    border-right: 1px solid;
+  }
+}
+
+/* SVG part rotation (used by the hero combine harvester wheels + reel).
+   transform-box: fill-box makes the rotation pivot on the element's own
+   centre, which is reliable across browsers for <g> elements. */
+@keyframes hl-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.hl-spin {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: hl-spin linear infinite;
+  will-change: transform;
+}
+
+/* Looping "Ken Burns" motion for the hero background photo: a slow zoom +
+   gentle pan that reverses (alternate) so it loops seamlessly forever. */
+@keyframes hero-kenburns {
+  0% {
+    transform: scale(1) translate3d(0, 0, 0);
+  }
+  100% {
+    transform: scale(1.05) translate3d(-1%, -1%, 0);
+  }
+}
+.hero-kenburns {
+  animation: hero-kenburns 28s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+/* Very subtle "breathing" glow for the contact hero light-sweep accent. */
+@keyframes glow-breathe {
+  0%,
+  100% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+.glow-breathe {
+  animation: glow-breathe 9s ease-in-out infinite;
+  will-change: opacity;
+}
+
+/* Custom selection colour */
+::selection {
+  background: #c9743a;
+  color: #fff;
+}
+
+/* Thin orange scrollbar accent on supported browsers */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #070b14;
+}
+::-webkit-scrollbar-thumb {
+  background: #2a3550;
+  border-radius: 0;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #c9743a;
+}
+
+/* Respect reduced-motion preference */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
