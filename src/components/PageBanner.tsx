@@ -81,11 +81,9 @@ export function PageBanner({
       )}
 
       <div className="container-x corner-ticks relative">
-        <motion.nav
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="label-mono mb-5 flex flex-wrap items-center gap-2.5 text-steel"
+        {/* JS-independent reveal so the title/breadcrumb are always visible */}
+        <nav
+          className="reveal label-mono mb-5 flex flex-wrap items-center gap-2.5 text-steel"
           aria-label="Breadcrumb"
         >
           <Link href="/" className="transition-colors hover:text-orange">
@@ -103,26 +101,19 @@ export function PageBanner({
               )}
             </span>
           ))}
-        </motion.nav>
+        </nav>
 
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          className="max-w-3xl font-heading text-4xl font-semibold leading-[1.05] text-white sm:text-5xl"
-        >
+        <h1 className="reveal max-w-3xl font-heading text-4xl font-semibold leading-[1.05] text-white sm:text-5xl">
           {title}
-        </motion.h1>
+        </h1>
 
         {subtitle && (
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-            className="mt-5 max-w-2xl text-base leading-relaxed text-steel sm:text-lg"
+          <p
+            className="reveal mt-5 max-w-2xl text-base leading-relaxed text-steel sm:text-lg"
+            style={{ animationDelay: "0.1s" }}
           >
             {subtitle}
-          </motion.p>
+          </p>
         )}
       </div>
     </section>
