@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Space_Grotesk, Inter, Space_Mono } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/Navbar";
@@ -29,6 +29,13 @@ const mono = Space_Mono({
   variable: "--font-mono",
   display: "swap",
 });
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  // keep pinch-zoom enabled for accessibility
+  maximumScale: 5,
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),

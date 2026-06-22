@@ -46,6 +46,13 @@ function Counter({ value }: { value: string }) {
     return () => cancelAnimationFrame(raf);
   }, [inView, target]);
 
+  // Safety net: if the viewport observer never fires (some mobile browsers),
+  // show the final number instead of being stuck at 0.
+  useEffect(() => {
+    const id = setTimeout(() => setN((cur) => (cur === 0 ? target : cur)), 1600);
+    return () => clearTimeout(id);
+  }, [target]);
+
   return (
     <span ref={ref}>
       {prefix}

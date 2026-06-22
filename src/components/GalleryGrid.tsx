@@ -44,17 +44,13 @@ export function GalleryGrid() {
 
   return (
     <div>
-      {/* Grid */}
-      <div className="grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3 lg:grid-cols-4">
+      {/* Grid — CSS reveal (JS-independent) so tiles are never stuck hidden */}
+      <div className="reveal-stagger grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3 lg:grid-cols-4">
         {galleryMedia.map((m, i) => (
-          <motion.button
+          <button
             key={m.src}
             type="button"
             onClick={() => setIndex(i)}
-            initial={{ opacity: 0, y: 18 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.15 }}
-            transition={{ duration: 0.5, delay: (i % 4) * 0.05, ease: [0.22, 1, 0.36, 1] }}
             aria-label={m.type === "video" ? "Open workshop video" : "Open factory photo"}
             className="group relative aspect-square overflow-hidden rounded-lg border border-navy/10 bg-navy-800 shadow-card outline-none transition-colors duration-300 hover:border-orange/40 focus-visible:ring-2 focus-visible:ring-orange"
           >
@@ -80,7 +76,7 @@ export function GalleryGrid() {
             )}
             {/* corner accent on hover */}
             <span className="pointer-events-none absolute left-0 top-0 h-0.5 w-0 bg-orange transition-all duration-300 group-hover:w-full" />
-          </motion.button>
+          </button>
         ))}
       </div>
 

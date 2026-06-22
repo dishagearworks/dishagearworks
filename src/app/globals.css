@@ -162,6 +162,23 @@ h1, h2, h3, h4, h5, h6 {
   .reveal-stagger > *:nth-child(8) { animation-delay: 0.46s; }
 }
 
+/* JS-independent page-transition fade (used by app/template.tsx). */
+@keyframes hl-fade {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .page-enter {
+    animation: hl-fade 0.4s ease-out both;
+  }
+}
+
 /* Custom selection colour */
 ::selection {
   background: #c9743a;
