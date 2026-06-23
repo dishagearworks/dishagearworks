@@ -25,7 +25,7 @@ export const siteConfig = {
   repeatClients: "400+",
 
   // ---- Contact details --------------------------------------------------
-  email: "Info@dishagearworks.com",
+  email: "Info@dishagearworks.in",
   phone: "+91 62830 11490",
   phoneHref: "tel:+916283011490",
 
