@@ -83,20 +83,27 @@ export async function POST(req: Request) {
     ["Quantity", quantity || "—"],
   ];
   const html = `
-    <h2 style="margin:0 0 12px;font-family:Arial,sans-serif">New website enquiry</h2>
-    <table style="border-collapse:collapse;font-family:Arial,sans-serif;font-size:14px">
-      ${rows
-        .map(
-          ([k, v]) =>
-            `<tr><td style="padding:4px 12px 4px 0;color:#555"><strong>${k}</strong></td><td style="padding:4px 0">${escapeHtml(v)}</td></tr>`
-        )
-        .join("")}
-    </table>
-    <p style="font-family:Arial,sans-serif;font-size:14px;margin:16px 0 4px;color:#555"><strong>Message</strong></p>
-    <p style="font-family:Arial,sans-serif;font-size:14px;white-space:pre-wrap;margin:0">${escapeHtml(message || "—")}</p>
+    <div style="font-family:Arial,Helvetica,sans-serif;color:#1a1815;max-width:600px">
+      <p style="font-size:15px;margin:0 0 16px">Hello DISHA GEARWORKS team,</p>
+      <p style="font-size:15px;margin:0 0 16px">You have received a new enquiry from the website contact form. Details are below.</p>
+      <table style="border-collapse:collapse;font-size:14px;width:100%">
+        ${rows
+          .map(
+            ([k, v]) =>
+              `<tr><td style="padding:6px 14px 6px 0;color:#555;white-space:nowrap;vertical-align:top"><strong>${k}</strong></td><td style="padding:6px 0">${escapeHtml(v)}</td></tr>`
+          )
+          .join("")}
+      </table>
+      <p style="font-size:14px;margin:18px 0 4px;color:#555"><strong>Message</strong></p>
+      <p style="font-size:14px;white-space:pre-wrap;margin:0">${escapeHtml(message || "—")}</p>
+      <p style="font-size:13px;margin:24px 0 0;color:#888">You can reply directly to this email to respond to ${escapeHtml(name)}.<br>Submitted via the contact form on dishagearworks.in</p>
+    </div>
   `;
   const text =
-    rows.map(([k, v]) => `${k}: ${v}`).join("\n") + `\n\nMessage:\n${message || "—"}`;
+    `Hello DISHA GEARWORKS team,\n\nYou have received a new enquiry from the website contact form.\n\n` +
+    rows.map(([k, v]) => `${k}: ${v}`).join("\n") +
+    `\n\nMessage:\n${message || "—"}\n\n` +
+    `Reply directly to this email to respond to ${name}.\nSubmitted via the contact form on dishagearworks.in`;
 
   try {
     const res = await fetch("https://api.resend.com/emails", {
@@ -109,9 +116,12 @@ export async function POST(req: Request) {
         from: FROM_EMAIL,
         to: [TO_EMAIL],
         reply_to: email,
-        subject: `New enquiry${product ? ` — ${product}` : ""} from ${name}`,
+        subject: `New website enquiry${product ? ` — ${product}` : ""} from ${name}`,
         html,
         text,
+        // Unique ref stops Gmail/Outlook from collapsing separate enquiries
+        // into one thread, and gives each message a clean identity.
+        headers: { "X-Entity-Ref-ID": crypto.randomUUID() },
       }),
     });
 
