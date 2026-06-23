@@ -51,7 +51,7 @@ export const products: Product[] = [
     title: "5 Speed GDR Gear Box Full Assembly",
     description:
       "Complete 5-speed GDR gearbox full assembly engineered for combine harvesters — built for high torque, smooth shifting and long, dependable service life.",
-    image: "",
+    image: "/images/products/5-speed-gdr-gearbox-assembly.jpg",
     features: ["5 forward speeds", "High torque", "OEM grade"],
   },
   {
