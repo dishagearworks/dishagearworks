@@ -34,6 +34,7 @@ type QuoteButtonProps = {
   className?: string;
   type?: "button" | "submit";
   fullWidth?: boolean;
+  disabled?: boolean;
 };
 
 /**
@@ -49,8 +50,9 @@ export function QuoteButton({
   className = "",
   type = "button",
   fullWidth = false,
+  disabled = false,
 }: QuoteButtonProps) {
-  const classes = `group inline-flex items-center justify-center gap-2 rounded-md font-heading font-medium tracking-tight transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-orange focus-visible:ring-offset-2 focus-visible:ring-offset-navy ${variantClass[variant]} ${sizeClass[size]} ${fullWidth ? "w-full" : ""} ${className}`;
+  const classes = `group inline-flex items-center justify-center gap-2 rounded-md font-heading font-medium tracking-tight transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-orange focus-visible:ring-offset-2 focus-visible:ring-offset-navy ${variantClass[variant]} ${sizeClass[size]} ${fullWidth ? "w-full" : ""} ${disabled ? "cursor-not-allowed opacity-70" : ""} ${className}`;
 
   const inner = (
     <>
@@ -62,8 +64,8 @@ export function QuoteButton({
   );
 
   const motionProps = {
-    whileHover: { y: -2 },
-    whileTap: { y: 0, scale: 0.98 },
+    whileHover: disabled ? undefined : { y: -2 },
+    whileTap: disabled ? undefined : { y: 0, scale: 0.98 },
   };
 
   if (href) {
@@ -77,7 +79,7 @@ export function QuoteButton({
   }
 
   return (
-    <motion.button type={type} className={classes} {...motionProps}>
+    <motion.button type={type} className={classes} disabled={disabled} {...motionProps}>
       {inner}
     </motion.button>
   );

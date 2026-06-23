@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useRef, useState, type FormEvent } from "react";
 import { useSearchParams } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { siteConfig } from "@/config/site";
@@ -8,50 +8,72 @@ import { QuoteButton } from "./QuoteButton";
 import { CheckIcon } from "./icons";
 import { products } from "@/config/products";
 
+type Status = "idle" | "submitting" | "success" | "error";
+
 const inputClass =
   "w-full rounded-md border border-navy/15 bg-steel-light/50 px-4 py-3 text-sm text-navy placeholder:text-slate-400 transition-colors focus:border-orange focus:bg-white focus:outline-none focus:ring-2 focus:ring-orange/30";
 const labelClass =
   "mb-2 block font-mono text-[11px] font-medium uppercase tracking-[0.16em] text-navy/70";
 
 /**
- * Inquiry form. With no backend configured it opens the visitor's email
- * client pre-filled to {siteConfig.email}. To wire up a real backend,
- * replace the body of `handleSubmit` with a fetch() to your API route.
+ * Inquiry form. Submits directly to the secure /api/contact route, which
+ * emails the enquiry to {siteConfig.email} via Resend. Includes client +
+ * server validation, a hidden honeypot and a submit-time trap for spam,
+ * and clear success / error states.
  */
 export function InquiryForm() {
   const params = useSearchParams();
   const presetProduct = params.get("product") ?? "";
-  const [sent, setSent] = useState(false);
+  const [status, setStatus] = useState<Status>("idle");
+  const [errorMsg, setErrorMsg] = useState("");
+  // Timestamp when the form was first rendered — used by the API time-trap.
+  const startedAt = useRef(Date.now());
 
-  function handleSubmit(e: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    if (status === "submitting") return;
+
     const fd = new FormData(e.currentTarget);
-    const get = (k: string) => (fd.get(k) as string) || "—";
+    const payload = {
+      name: (fd.get("name") as string) || "",
+      company: (fd.get("company") as string) || "",
+      phone: (fd.get("phone") as string) || "",
+      email: (fd.get("email") as string) || "",
+      product: (fd.get("product") as string) || "",
+      quantity: (fd.get("quantity") as string) || "",
+      message: (fd.get("message") as string) || "",
+      // spam protection
+      company_website: (fd.get("company_website") as string) || "",
+      formStartedAt: startedAt.current,
+    };
 
-    const body = [
-      `Name: ${get("name")}`,
-      `Company: ${get("company")}`,
-      `Phone: ${get("phone")}`,
-      `Email: ${get("email")}`,
-      `Product Requirement: ${get("product")}`,
-      `Quantity: ${get("quantity")}`,
-      "",
-      "Message:",
-      get("message"),
-    ].join("\n");
-
-    const subject = `Inquiry from ${get("name")} — ${get("product")}`;
-    window.location.href = `mailto:${siteConfig.email}?subject=${encodeURIComponent(
-      subject
-    )}&body=${encodeURIComponent(body)}`;
-
-    setSent(true);
+    setStatus("submitting");
+    setErrorMsg("");
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (res.ok && data.ok) {
+        setStatus("success");
+      } else {
+        setStatus("error");
+        setErrorMsg(
+          data.error || "Could not send your enquiry. Please try again."
+        );
+      }
+    } catch {
+      setStatus("error");
+      setErrorMsg("Network error. Please check your connection and try again.");
+    }
   }
 
   return (
     <div className="relative rounded-lg border border-navy/10 bg-white p-6 shadow-card sm:p-8">
       <AnimatePresence>
-        {sent && (
+        {status === "success" && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -65,8 +87,8 @@ export function InquiryForm() {
               Thank you!
             </h3>
             <p className="mt-2 max-w-sm text-sm text-slate-600">
-              Your email draft has opened. If it didn&apos;t, please write to us
-              directly at{" "}
+              Your enquiry has been sent — our team will get back to you with a
+              quotation and lead time. You can also reach us directly at{" "}
               <a
                 href={`mailto:${siteConfig.email}`}
                 className="font-semibold text-orange"
@@ -77,7 +99,7 @@ export function InquiryForm() {
             </p>
             <button
               type="button"
-              onClick={() => setSent(false)}
+              onClick={() => setStatus("idle")}
               className="mt-6 text-sm font-semibold text-orange hover:underline"
             >
               Send another inquiry
@@ -87,6 +109,18 @@ export function InquiryForm() {
       </AnimatePresence>
 
       <form onSubmit={handleSubmit} className="grid gap-5 sm:grid-cols-2">
+        {/* Honeypot — hidden off-screen; real users never fill it, bots do */}
+        <div className="absolute -left-[9999px] top-0 h-0 w-0 overflow-hidden" aria-hidden="true">
+          <label htmlFor="company_website">Company Website</label>
+          <input
+            id="company_website"
+            name="company_website"
+            type="text"
+            tabIndex={-1}
+            autoComplete="off"
+          />
+        </div>
+
         <div>
           <label htmlFor="name" className={labelClass}>
             Name <span className="text-orange">*</span>
@@ -174,8 +208,22 @@ export function InquiryForm() {
         </div>
 
         <div className="sm:col-span-2">
-          <QuoteButton type="submit" size="lg" fullWidth withIcon>
-            Send Inquiry
+          {status === "error" && (
+            <p
+              role="alert"
+              className="mb-4 rounded-md border border-red-300 bg-red-50 px-4 py-3 text-sm text-red-700"
+            >
+              {errorMsg}
+            </p>
+          )}
+          <QuoteButton
+            type="submit"
+            size="lg"
+            fullWidth
+            withIcon
+            disabled={status === "submitting"}
+          >
+            {status === "submitting" ? "Sending…" : "Send Inquiry"}
           </QuoteButton>
         </div>
       </form>
