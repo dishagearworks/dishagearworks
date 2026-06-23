@@ -4,7 +4,9 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { SmartImage } from "./PlaceholderImage";
 import { QuoteButton } from "./QuoteButton";
+import { WhatsAppButton } from "./WhatsAppButton";
 import { CheckIcon } from "./icons";
+import { productWhatsappMessage } from "@/lib/whatsapp";
 import type { Product } from "@/config/products";
 
 /**
@@ -67,7 +69,7 @@ export function ProductCard({
           ))}
         </ul>
 
-        <div className="mt-6">
+        <div className="mt-6 flex flex-col gap-2.5">
           <QuoteButton
             href={`/contact?product=${encodeURIComponent(product.title)}`}
             size="sm"
@@ -75,6 +77,14 @@ export function ProductCard({
           >
             Request Quote
           </QuoteButton>
+          <WhatsAppButton
+            size="sm"
+            fullWidth
+            variant="outline"
+            message={productWhatsappMessage(product.title)}
+          >
+            Send on WhatsApp
+          </WhatsAppButton>
         </div>
       </div>
     </motion.article>

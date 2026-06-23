@@ -5,6 +5,7 @@ import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { Providers } from "@/components/Providers";
 import { ScrollProgress } from "@/components/ScrollProgress";
+import { WhatsAppFloat } from "@/components/WhatsAppFloat";
 import { siteConfig } from "@/config/site";
 
 // Headings: a tight technical grotesk for a precise, engineered feel.
@@ -190,6 +191,7 @@ export default function RootLayout({
           <Navbar />
           <main className="flex-1">{children}</main>
           <Footer />
+          <WhatsAppFloat />
         </Providers>
       </body>
     </html>

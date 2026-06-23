@@ -7,6 +7,8 @@ import { SectionHeading } from "@/components/SectionHeading";
 import { CTASection } from "@/components/CTASection";
 import { SmartImage } from "@/components/PlaceholderImage";
 import { QuoteButton } from "@/components/QuoteButton";
+import { WhatsAppButton } from "@/components/WhatsAppButton";
+import { SampleDrawingCTA } from "@/components/SampleDrawingCTA";
 import { StaggerContainer, StaggerItem } from "@/components/motion/FadeIn";
 import { CheckIcon } from "@/components/icons";
 import {
@@ -15,6 +17,7 @@ import {
   getRelatedProducts,
 } from "@/config/products";
 import { siteConfig } from "@/config/site";
+import { productWhatsappMessage } from "@/lib/whatsapp";
 
 // Statically prerender one page per product at build time.
 export function generateStaticParams() {
@@ -182,6 +185,12 @@ export default function ProductDetailPage({ params }: Params) {
               >
                 Request Quote
               </QuoteButton>
+              <WhatsAppButton
+                size="lg"
+                message={productWhatsappMessage(product.title)}
+              >
+                Send on WhatsApp
+              </WhatsAppButton>
               <QuoteButton href="/products" size="lg" variant="outlineDark">
                 Back to Products
               </QuoteButton>
@@ -201,8 +210,10 @@ export default function ProductDetailPage({ params }: Params) {
         </div>
       </section>
 
+      <SampleDrawingCTA productName={product.title} />
+
       {/* Related products — internal linking */}
-      <section className="bg-steel-light py-20">
+      <section className="bg-white py-20">
         <div className="container-x">
           <SectionHeading
             eyebrow="Related Products"

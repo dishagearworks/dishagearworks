@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { siteConfig } from "@/config/site";
 import { QuoteButton } from "./QuoteButton";
+import { WhatsAppButton } from "./WhatsAppButton";
 import { FadeIn } from "./motion/FadeIn";
 import { MailIcon } from "./icons";
 
@@ -64,6 +65,7 @@ export function CTASection({
                 <QuoteButton href="/contact" size="lg">
                   Request a Quote
                 </QuoteButton>
+                <WhatsAppButton size="lg">Send on WhatsApp</WhatsAppButton>
                 <a
                   href={`mailto:${siteConfig.email}`}
                   className="inline-flex items-center gap-2.5 text-sm font-medium text-white transition-colors hover:text-orange"

@@ -11,7 +11,7 @@ const stats = [
   { value: `${currentYear - siteConfig.since}+`, label: "Years of Experience" },
   { value: siteConfig.repeatClients, label: "Repeat Clients" },
   { value: "1976", label: "Trusted Since" },
-  { value: "100%", label: "Quality Assured" },
+  { value: "100%", label: "Quality Focused" },
 ];
 
 /** Counts up to the numeric part of `value` once scrolled into view. */
@@ -46,10 +46,11 @@ function Counter({ value }: { value: string }) {
     return () => cancelAnimationFrame(raf);
   }, [inView, target]);
 
-  // Safety net: if the viewport observer never fires (some mobile browsers),
-  // show the final number instead of being stuck at 0.
+  // Safety net: guarantee the final value is shown even if the viewport
+  // observer never fires or the animation is interrupted (some mobile
+  // browsers / in-app webviews). The number can never stay stuck below target.
   useEffect(() => {
-    const id = setTimeout(() => setN((cur) => (cur === 0 ? target : cur)), 1600);
+    const id = setTimeout(() => setN((cur) => (cur < target ? target : cur)), 1500);
     return () => clearTimeout(id);
   }, [target]);
 

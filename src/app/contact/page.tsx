@@ -31,8 +31,21 @@ const details = [
   {
     icon: PhoneIcon,
     label: "Phone",
-    value: siteConfig.phone,
-    href: siteConfig.phoneHref,
+    // Both numbers, each clickable on its own line.
+    value: (
+      <span className="flex flex-col gap-1">
+        {siteConfig.phones.map((p) => (
+          <a
+            key={p.href}
+            href={p.href}
+            className="font-heading text-base font-medium text-navy transition-colors hover:text-orange"
+          >
+            {p.display}
+          </a>
+        ))}
+      </span>
+    ),
+    href: undefined as string | undefined,
   },
   {
     icon: MapPinIcon,

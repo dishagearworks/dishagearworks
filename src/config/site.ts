@@ -28,12 +28,19 @@ export const siteConfig = {
   email: "Info@dishagearworks.in",
   phone: "+91 62830 11490",
   phoneHref: "tel:+916283011490",
-  // Footer phone numbers (display text + tel: link). The single `phone`/
-  // `phoneHref` above are still used by the contact page and structured data.
+  // Phone numbers (display text + tel: link) — used by the footer and the
+  // contact page. The single `phone`/`phoneHref` above remain for schema.
   phones: [
-    { display: "+91 6283011490", href: "tel:+916283011490" },
-    { display: "+91 9814042006", href: "tel:+919814042006" },
+    { display: "+91 62830 11490", href: "tel:+916283011490" },
+    { display: "+91 98140 42006", href: "tel:+919814042006" },
   ],
+
+  // WhatsApp click-to-chat (conversion). `number` is digits only (wa.me form).
+  whatsapp: {
+    number: "916283011490",
+    defaultMessage:
+      "Hello DISHA GEARWORKS, I need a quotation for agricultural machinery spare parts. I have a sample/drawing/photo. Please guide me.",
+  },
 
   address: {
     line1: "Patiala Road, Nabha",

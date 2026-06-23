@@ -7,6 +7,7 @@ import { ProductCard } from "@/components/ProductCard";
 import { CapabilityCard } from "@/components/CapabilityCard";
 import { WhyChooseUs } from "@/components/WhyChooseUs";
 import { CTASection } from "@/components/CTASection";
+import { SampleDrawingCTA } from "@/components/SampleDrawingCTA";
 import { QuoteButton } from "@/components/QuoteButton";
 import { StaggerContainer, StaggerItem } from "@/components/motion/FadeIn";
 import { products } from "@/config/products";
@@ -83,6 +84,7 @@ export default function HomePage() {
       </section>
 
       <WhyChooseUs />
+      <SampleDrawingCTA />
       <CTASection />
     </>
   );
