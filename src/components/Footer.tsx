@@ -65,7 +65,7 @@ export function Footer() {
             {products.slice(0, 6).map((p) => (
               <li key={p.slug}>
                 <Link
-                  href="/products"
+                  href={`/products/${p.slug}`}
                   className="text-sm text-steel transition-colors hover:text-orange"
                 >
                   {p.title}

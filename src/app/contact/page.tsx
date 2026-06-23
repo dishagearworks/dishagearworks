@@ -8,9 +8,17 @@ import { MailIcon, MapPinIcon, PhoneIcon, Icon } from "@/components/icons";
 import { siteConfig } from "@/config/site";
 
 export const metadata: Metadata = {
-  title: "Contact",
+  title: "Contact — Request a Quote for Agricultural Machinery Parts",
   description:
     "Contact DISHA GEARWORKS for agricultural machinery spare parts. Send an inquiry, request a quote, or reach us by email at Info@dishagearworks.com — Patiala Road, Nabha, Punjab.",
+  alternates: { canonical: "/contact" },
+  openGraph: {
+    title: "Contact | DISHA GEARWORKS",
+    description:
+      "Tell us your requirements and our team will respond with a quotation and lead time. We welcome both domestic and export inquiries.",
+    url: `${siteConfig.url}/contact`,
+    type: "website",
+  },
 };
 
 const details = [

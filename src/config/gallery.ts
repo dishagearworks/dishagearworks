@@ -22,7 +22,7 @@ export type GalleryMedia =
 const IMG_ALT = "DISHA GEARWORKS factory and workshop";
 const VID_ALT = "DISHA GEARWORKS manufacturing in progress";
 
-export const galleryMedia: GalleryMedia[] = [
+const rawGalleryMedia: GalleryMedia[] = [
   { type: "image", src: "/images/gallery/photo-3.jpg", alt: IMG_ALT },
   { type: "video", src: "/images/gallery/video-2.mp4", poster: "/images/gallery/video-2-poster.jpg", alt: VID_ALT },
   { type: "image", src: "/images/gallery/photo-7.jpg", alt: IMG_ALT },
@@ -47,3 +47,12 @@ export const galleryMedia: GalleryMedia[] = [
   { type: "image", src: "/images/gallery/photo-14.jpg", alt: IMG_ALT },
   { type: "video", src: "/images/gallery/video-6.mp4", poster: "/images/gallery/video-6-poster.jpg", alt: VID_ALT },
 ];
+
+/**
+ * Make every alt unique (avoids duplicate-alt SEO/accessibility warnings) by
+ * appending a sequence number and location while keeping the base description.
+ */
+export const galleryMedia: GalleryMedia[] = rawGalleryMedia.map((m, i) => ({
+  ...m,
+  alt: `${m.alt} in Nabha, Punjab — ${i + 1}`,
+}));

@@ -49,7 +49,13 @@ export const siteConfig = {
   ],
 
   // ---- SEO --------------------------------------------------------------
-  url: "https://www.dishagearworks.com",
+  // Canonical production domain (live on Vercel). Used for canonical URLs,
+  // Open Graph, sitemap, robots and JSON-LD — keep in sync with the domain.
+  url: "https://dishagearworks.in",
+  // Default social-share / Open Graph image (landscape hero, ~1.91:1 friendly).
+  ogImage: "/images/hero/combine-sunset.jpg",
+  // Approx. geo-coordinates of the works (Nabha, Punjab) for LocalBusiness schema.
+  geo: { latitude: 30.3746, longitude: 76.1419 },
   description:
     "Established in 1976, DISHA GEARWORKS is a trusted manufacturer of precision-engineered components for combine harvesters and agricultural machinery — sprockets, pulleys, bearing housings, gears, shafts, hubs, flanges, bushes, sleeves and custom CNC components. 400+ repeat customers across India and abroad.",
   keywords: [

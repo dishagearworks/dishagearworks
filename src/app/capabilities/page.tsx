@@ -8,11 +8,20 @@ import { SmartImage } from "@/components/PlaceholderImage";
 import { FadeIn, StaggerContainer, StaggerItem } from "@/components/motion/FadeIn";
 import { CheckIcon } from "@/components/icons";
 import { capabilities } from "@/config/capabilities";
+import { siteConfig } from "@/config/site";
 
 export const metadata: Metadata = {
-  title: "Manufacturing Capabilities",
+  title: "Manufacturing Capabilities — CNC Turning, VMC Milling & OEM",
   description:
     "CNC turning, CNC milling, precision machining, custom components, OEM and contract manufacturing, batch production and agricultural machinery spare parts manufacturing.",
+  alternates: { canonical: "/capabilities" },
+  openGraph: {
+    title: "Manufacturing Capabilities | DISHA GEARWORKS",
+    description:
+      "Modern CNC and VMC machining and end-to-end manufacturing services for agricultural machinery components — all under one roof in Nabha, Punjab.",
+    url: `${siteConfig.url}/capabilities`,
+    type: "website",
+  },
 };
 
 const process = [

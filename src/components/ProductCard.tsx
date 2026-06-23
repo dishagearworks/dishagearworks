@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { SmartImage } from "./PlaceholderImage";
 import { QuoteButton } from "./QuoteButton";
@@ -24,18 +25,31 @@ export function ProductCard({
       transition={{ type: "spring", stiffness: 260, damping: 22 }}
       className="group relative flex h-full flex-col overflow-hidden rounded-lg border border-navy/10 bg-white shadow-card transition-all duration-300 hover:border-orange/40 hover:shadow-cardHover"
     >
-      <div className="relative overflow-hidden border-b border-navy/[0.07] bg-steel-light/40">
+      <Link
+        href={`/products/${product.slug}`}
+        className="relative block overflow-hidden border-b border-navy/[0.07] bg-steel-light/40"
+        aria-label={`View ${product.title}`}
+      >
         <div className="transition-transform duration-[600ms] ease-out group-hover:scale-[1.04]">
-          <SmartImage src={product.image} alt={product.title} label={product.title} />
+          <SmartImage
+            src={product.image}
+            alt={`${product.title} — agricultural machinery spare part manufactured by DISHA GEARWORKS`}
+            label={product.title}
+          />
         </div>
         {/* subtle dark wash on hover — adds depth without hiding the product */}
         <span className="pointer-events-none absolute inset-0 bg-gradient-to-t from-navy/35 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
         <span className="absolute left-0 top-0 h-0.5 w-0 bg-orange transition-all duration-300 group-hover:w-full" />
-      </div>
+      </Link>
 
       <div className="flex flex-1 flex-col p-6">
         <h3 className="font-heading text-lg font-semibold leading-tight text-navy">
-          {product.title}
+          <Link
+            href={`/products/${product.slug}`}
+            className="transition-colors hover:text-orange focus:outline-none focus-visible:text-orange"
+          >
+            {product.title}
+          </Link>
         </h3>
         <p className="mt-2.5 flex-1 text-sm leading-relaxed text-slate-600">
           {product.description}

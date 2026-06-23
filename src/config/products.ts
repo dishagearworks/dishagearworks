@@ -127,3 +127,16 @@ export const products: Product[] = [
     features: ["Built to drawing", "CNC turning & milling", "OEM & replacement"],
   },
 ];
+
+/** Look up a single product by its URL slug (used by /products/[slug]). */
+export function getProductBySlug(slug: string): Product | undefined {
+  return products.find((p) => p.slug === slug);
+}
+
+/** Other products to cross-link from a detail page (internal linking / SEO). */
+export function getRelatedProducts(slug: string, count = 3): Product[] {
+  const i = products.findIndex((p) => p.slug === slug);
+  if (i === -1) return products.slice(0, count);
+  // Take the items that follow, wrapping around, so every product links onward.
+  return Array.from({ length: count }, (_, k) => products[(i + k + 1) % products.length]);
+}

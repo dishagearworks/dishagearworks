@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { HeroSection } from "@/components/HeroSection";
 import { StatsSection } from "@/components/StatsSection";
@@ -10,6 +11,19 @@ import { QuoteButton } from "@/components/QuoteButton";
 import { StaggerContainer, StaggerItem } from "@/components/motion/FadeIn";
 import { products } from "@/config/products";
 import { capabilities } from "@/config/capabilities";
+import { siteConfig } from "@/config/site";
+
+export const metadata: Metadata = {
+  title: "Agricultural Machinery Spare Parts Manufacturer Since 1976",
+  description: siteConfig.description,
+  alternates: { canonical: "/" },
+  openGraph: {
+    title: `${siteConfig.name} — ${siteConfig.tagline} Since ${siteConfig.since}`,
+    description: siteConfig.description,
+    url: siteConfig.url,
+    type: "website",
+  },
+};
 
 export default function HomePage() {
   return (

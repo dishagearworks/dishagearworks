@@ -9,9 +9,17 @@ import { Icon, CheckIcon } from "@/components/icons";
 import { siteConfig } from "@/config/site";
 
 export const metadata: Metadata = {
-  title: "About Us",
+  title: "About Us — Manufacturing Legacy Since 1976",
   description:
     "DISHA GEARWORKS is a Punjab-based manufacturer of precision agricultural machinery spare parts since 1976, offering CNC machining, OEM and contract manufacturing for domestic and export customers.",
+  alternates: { canonical: "/about" },
+  openGraph: {
+    title: "About Us | DISHA GEARWORKS",
+    description:
+      "A manufacturing legacy since 1976 — precision agricultural machinery components engineered in Nabha, Punjab and trusted by 400+ repeat customers across India and abroad.",
+    url: `${siteConfig.url}/about`,
+    type: "website",
+  },
 };
 
 const values = [
