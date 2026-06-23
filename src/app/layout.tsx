@@ -50,6 +50,8 @@ export const metadata: Metadata = {
   publisher: siteConfig.name,
   applicationName: siteConfig.name,
   category: "Manufacturing",
+  // Google Search Console ownership verification (HTML-tag method).
+  verification: { google: "VKEg_6i9eGAD2FU-7OjF_Z38Io-ZJAlvy4yeUm0yXCI" },
   // Home page is the default canonical; inner pages override with their own path.
   alternates: { canonical: "/" },
   icons: {
