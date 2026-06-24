@@ -24,6 +24,8 @@ type WhatsAppButtonProps = {
   children?: ReactNode;
   /** Prefilled message; defaults to the site-wide enquiry message. */
   message?: string;
+  /** WhatsApp number (digits only); defaults to the site-wide number. */
+  number?: string;
   size?: Size;
   variant?: Variant;
   fullWidth?: boolean;
@@ -37,6 +39,7 @@ type WhatsAppButtonProps = {
 export function WhatsAppButton({
   children = "Send on WhatsApp",
   message,
+  number,
   size = "md",
   variant = "solid",
   fullWidth = false,
@@ -44,7 +47,7 @@ export function WhatsAppButton({
 }: WhatsAppButtonProps) {
   return (
     <a
-      href={whatsappHref(message)}
+      href={whatsappHref(message, number)}
       target="_blank"
       rel="noopener noreferrer"
       aria-label={typeof children === "string" ? children : "Send on WhatsApp"}

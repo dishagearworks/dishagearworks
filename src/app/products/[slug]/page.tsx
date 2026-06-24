@@ -9,7 +9,7 @@ import { SmartImage } from "@/components/PlaceholderImage";
 import { QuoteButton } from "@/components/QuoteButton";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { SampleDrawingCTA } from "@/components/SampleDrawingCTA";
-import { StaggerContainer, StaggerItem } from "@/components/motion/FadeIn";
+import { FadeIn, StaggerContainer, StaggerItem } from "@/components/motion/FadeIn";
 import { CheckIcon } from "@/components/icons";
 import {
   products,
@@ -32,28 +32,34 @@ export function generateMetadata({ params }: Params): Metadata {
     return { title: "Product not found" };
   }
   const canonical = `/products/${product.slug}`;
-  const title = `${product.title} Manufacturer`;
-  const description = `${product.description} Manufactured by ${siteConfig.name}, ${siteConfig.businessType} in Nabha, Punjab since ${siteConfig.since}. Request a quote.`;
   const image = product.image || siteConfig.ogImage;
   return {
-    title,
-    description,
+    // metaTitle already includes the brand — mark absolute so the layout
+    // template doesn't append "| DISHA GEARWORKS" a second time.
+    title: { absolute: product.metaTitle },
+    description: product.metaDescription,
+    keywords: [...product.keywords],
     alternates: { canonical },
     openGraph: {
-      title: `${product.title} | ${siteConfig.name}`,
-      description,
+      title: product.metaTitle,
+      description: product.metaDescription,
       url: `${siteConfig.url}${canonical}`,
       type: "website",
-      images: [{ url: image, alt: `${product.title} — ${siteConfig.name}` }],
+      images: [{ url: image, alt: product.imageAlt }],
     },
     twitter: {
       card: "summary_large_image",
-      title: `${product.title} | ${siteConfig.name}`,
-      description,
+      title: product.metaTitle,
+      description: product.metaDescription,
       images: [image],
     },
   };
 }
+
+const sectionHeadingClass =
+  "font-heading text-2xl font-bold leading-tight text-navy sm:text-3xl";
+const eyebrowClass =
+  "mb-3 inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.2em] text-orange";
 
 export default function ProductDetailPage({ params }: Params) {
   const product = getProductBySlug(params.slug);
@@ -62,8 +68,11 @@ export default function ProductDetailPage({ params }: Params) {
   const related = getRelatedProducts(product.slug);
   const canonical = `${siteConfig.url}/products/${product.slug}`;
   const imageUrl = `${siteConfig.url}${product.image || siteConfig.ogImage}`;
+  const waNumber = siteConfig.whatsapp.productNumber;
+  const waMessage = productWhatsappMessage(product.title);
+  const quoteHref = `/contact?product=${encodeURIComponent(product.title)}`;
 
-  // Product + Breadcrumb structured data for rich results.
+  // Product + Breadcrumb + FAQ structured data for rich results.
   const jsonLd = {
     "@context": "https://schema.org",
     "@graph": [
@@ -87,25 +96,19 @@ export default function ProductDetailPage({ params }: Params) {
       {
         "@type": "BreadcrumbList",
         itemListElement: [
-          {
-            "@type": "ListItem",
-            position: 1,
-            name: "Home",
-            item: siteConfig.url,
-          },
-          {
-            "@type": "ListItem",
-            position: 2,
-            name: "Products",
-            item: `${siteConfig.url}/products`,
-          },
-          {
-            "@type": "ListItem",
-            position: 3,
-            name: product.title,
-            item: canonical,
-          },
+          { "@type": "ListItem", position: 1, name: "Home", item: siteConfig.url },
+          { "@type": "ListItem", position: 2, name: "Products", item: `${siteConfig.url}/products` },
+          { "@type": "ListItem", position: 3, name: product.title, item: canonical },
         ],
+      },
+      {
+        "@type": "FAQPage",
+        "@id": `${canonical}#faq`,
+        mainEntity: product.faqs.map((f) => ({
+          "@type": "Question",
+          name: f.q,
+          acceptedAnswer: { "@type": "Answer", text: f.a },
+        })),
       },
     ],
   };
@@ -118,7 +121,7 @@ export default function ProductDetailPage({ params }: Params) {
       />
 
       <PageBanner
-        title={product.title}
+        title={product.heading}
         subtitle={product.description}
         crumbs={[
           { label: "Products", href: "/products" },
@@ -126,74 +129,39 @@ export default function ProductDetailPage({ params }: Params) {
         ]}
       />
 
-      {/* Detail: image + overview */}
-      <section className="bg-white py-20">
+      {/* ── Overview: image + description + CTAs ───────────────────────── */}
+      <section className="bg-white py-16 sm:py-20" aria-labelledby="overview-heading">
         <div className="container-x grid items-start gap-12 lg:grid-cols-2">
-          <div className="overflow-hidden rounded-3xl border border-navy/10 shadow-card">
+          <div className="overflow-hidden rounded-3xl border border-navy/10 shadow-card lg:sticky lg:top-28">
             <SmartImage
               src={product.image}
-              alt={`${product.title} — agricultural machinery spare part manufactured by ${siteConfig.name}`}
+              alt={product.imageAlt}
               label={product.title}
               ratio="aspect-[4/3]"
             />
           </div>
 
           <div>
-            <span className="mb-3 inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.2em] text-orange">
-              <span className="h-px w-6 bg-orange" /> Product Overview
+            <span className={eyebrowClass}>
+              <span className="h-px w-6 bg-orange" /> Overview
             </span>
-            <h2 className="font-heading text-2xl font-bold leading-tight text-navy sm:text-3xl">
+            <h2 id="overview-heading" className={sectionHeadingClass}>
               {product.title}
             </h2>
-            <p className="mt-5 text-base leading-relaxed text-slate-600">
-              {product.description}
-            </p>
-
-            {/* Key features */}
-            <h3 className="mt-8 font-heading text-sm font-semibold uppercase tracking-[0.18em] text-navy">
-              Key Features
-            </h3>
-            <ul className="mt-4 grid gap-3 sm:grid-cols-2">
-              {product.features.map((f) => (
-                <li key={f} className="flex items-start gap-2 text-sm text-navy">
-                  <CheckIcon className="mt-0.5 h-4 w-4 shrink-0 text-orange" />
-                  {f}
-                </li>
+            <div className="mt-5 space-y-4 text-base leading-relaxed text-slate-600">
+              {product.fullDescription.map((p, i) => (
+                <p key={i}>{p}</p>
               ))}
-            </ul>
-
-            {/* Materials */}
-            <h3 className="mt-8 font-heading text-sm font-semibold uppercase tracking-[0.18em] text-navy">
-              Materials
-            </h3>
-            <ul className="mt-4 flex flex-wrap gap-2">
-              {siteConfig.materials.map((m) => (
-                <li
-                  key={m}
-                  className="inline-flex items-center rounded-sm border border-navy/10 bg-steel-light px-2.5 py-1 text-xs font-medium text-navy-600"
-                >
-                  {m}
-                </li>
-              ))}
-            </ul>
+            </div>
 
             {/* CTAs */}
-            <div className="mt-9 flex flex-wrap gap-4">
-              <QuoteButton
-                href={`/contact?product=${encodeURIComponent(product.title)}`}
-                size="lg"
-              >
-                Request Quote
+            <div className="mt-8 flex flex-wrap gap-4">
+              <QuoteButton href={quoteHref} size="lg">
+                Request a Quote
               </QuoteButton>
-              <WhatsAppButton
-                size="lg"
-                message={productWhatsappMessage(product.title)}
-              >
+              <WhatsAppButton size="lg" message={waMessage} number={waNumber}>
                 Send on WhatsApp
               </WhatsAppButton>
-              <QuoteButton href="/products" size="lg" variant="outlineDark">
-                Back to Products
-              </QuoteButton>
             </div>
 
             <p className="mt-6 text-sm text-slate-500">
@@ -210,10 +178,154 @@ export default function ProductDetailPage({ params }: Params) {
         </div>
       </section>
 
-      <SampleDrawingCTA productName={product.title} />
+      {/* ── Technical Specifications (responsive table) ────────────────── */}
+      <section className="bg-steel-light py-16 sm:py-20" aria-labelledby="specs-heading">
+        <div className="container-x">
+          <span className={eyebrowClass}>
+            <span className="h-px w-6 bg-orange" /> Technical Specifications
+          </span>
+          <h2 id="specs-heading" className={sectionHeadingClass}>
+            Specifications
+          </h2>
+          <FadeIn className="mt-8 overflow-hidden rounded-2xl border border-navy/10 bg-white shadow-card">
+            <div className="overflow-x-auto">
+              <table className="w-full border-collapse text-left text-sm">
+                <tbody>
+                  {product.specs.map((row, i) => (
+                    <tr
+                      key={row.label}
+                      className={i % 2 ? "bg-steel-light/40" : "bg-white"}
+                    >
+                      <th
+                        scope="row"
+                        className="w-2/5 px-5 py-3.5 align-top font-heading font-semibold text-navy"
+                      >
+                        {row.label}
+                      </th>
+                      <td className="px-5 py-3.5 align-top text-slate-600">
+                        {row.value}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </FadeIn>
+        </div>
+      </section>
 
-      {/* Related products — internal linking */}
-      <section className="bg-white py-20">
+      {/* ── Key Features + Applications ────────────────────────────────── */}
+      <section className="bg-white py-16 sm:py-20">
+        <div className="container-x grid gap-12 lg:grid-cols-2">
+          <div aria-labelledby="features-heading">
+            <span className={eyebrowClass}>
+              <span className="h-px w-6 bg-orange" /> Key Features
+            </span>
+            <h2 id="features-heading" className={sectionHeadingClass}>
+              Built for the field
+            </h2>
+            <ul className="mt-6 grid gap-3">
+              {product.features.map((f) => (
+                <li key={f} className="flex items-start gap-2.5 text-sm text-navy">
+                  <CheckIcon className="mt-0.5 h-4 w-4 shrink-0 text-orange" />
+                  {f}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div aria-labelledby="applications-heading">
+            <span className={eyebrowClass}>
+              <span className="h-px w-6 bg-orange" /> Applications
+            </span>
+            <h2 id="applications-heading" className={sectionHeadingClass}>
+              Where it is used
+            </h2>
+            <ul className="mt-6 grid gap-3">
+              {product.applications.map((a) => (
+                <li key={a} className="flex items-start gap-2.5 text-sm text-navy">
+                  <CheckIcon className="mt-0.5 h-4 w-4 shrink-0 text-orange" />
+                  {a}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Materials & Manufacturing + Custom Manufacturing ───────────── */}
+      <section className="bg-steel-light py-16 sm:py-20">
+        <div className="container-x grid gap-12 lg:grid-cols-2">
+          <div aria-labelledby="materials-heading">
+            <span className={eyebrowClass}>
+              <span className="h-px w-6 bg-orange" /> Materials &amp; Manufacturing
+            </span>
+            <h2 id="materials-heading" className={sectionHeadingClass}>
+              Materials &amp; quality
+            </h2>
+            <ul className="mt-6 grid gap-3">
+              {product.materials.map((m) => (
+                <li key={m} className="flex items-start gap-2.5 text-sm text-navy">
+                  <CheckIcon className="mt-0.5 h-4 w-4 shrink-0 text-orange" />
+                  {m}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div aria-labelledby="custom-heading">
+            <span className={eyebrowClass}>
+              <span className="h-px w-6 bg-orange" /> Custom Manufacturing
+            </span>
+            <h2 id="custom-heading" className={sectionHeadingClass}>
+              Made as per your requirement
+            </h2>
+            <p className="mt-6 text-base leading-relaxed text-slate-600">
+              {product.customManufacturing}
+            </p>
+            <div className="mt-7 flex flex-wrap gap-4">
+              <WhatsAppButton size="md" message={waMessage} number={waNumber}>
+                Send on WhatsApp
+              </WhatsAppButton>
+              <QuoteButton href={quoteHref} size="md" variant="outlineDark">
+                Request a Quote
+              </QuoteButton>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── FAQs ───────────────────────────────────────────────────────── */}
+      <section className="bg-white py-16 sm:py-20" aria-labelledby="faq-heading">
+        <div className="container-x">
+          <span className={eyebrowClass}>
+            <span className="h-px w-6 bg-orange" /> FAQs
+          </span>
+          <h2 id="faq-heading" className={sectionHeadingClass}>
+            Frequently asked questions
+          </h2>
+          <StaggerContainer className="mt-8 grid gap-4 lg:max-w-4xl">
+            {product.faqs.map((f) => (
+              <StaggerItem key={f.q}>
+                <div className="rounded-xl border border-navy/10 bg-steel-light/40 p-5 sm:p-6">
+                  <h3 className="font-heading text-base font-semibold text-navy">
+                    {f.q}
+                  </h3>
+                  <p className="mt-2 text-sm leading-relaxed text-slate-600">
+                    {f.a}
+                  </p>
+                </div>
+              </StaggerItem>
+            ))}
+          </StaggerContainer>
+        </div>
+      </section>
+
+      {/* ── Sample / Drawing conversion section (product number) ────────── */}
+      <SampleDrawingCTA productName={product.title} whatsappNumber={waNumber} />
+
+      {/* ── Related products — internal linking ────────────────────────── */}
+      <section className="bg-white py-16 sm:py-20">
         <div className="container-x">
           <SectionHeading
             eyebrow="Related Products"

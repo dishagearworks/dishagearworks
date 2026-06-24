@@ -7,6 +7,7 @@ import { QuoteButton } from "./QuoteButton";
 import { WhatsAppButton } from "./WhatsAppButton";
 import { CheckIcon } from "./icons";
 import { productWhatsappMessage } from "@/lib/whatsapp";
+import { siteConfig } from "@/config/site";
 import type { Product } from "@/config/products";
 
 /**
@@ -35,7 +36,7 @@ export function ProductCard({
         <div className="transition-transform duration-[600ms] ease-out group-hover:scale-[1.04]">
           <SmartImage
             src={product.image}
-            alt={`${product.title} — agricultural machinery spare part manufactured by DISHA GEARWORKS`}
+            alt={product.imageAlt}
             label={product.title}
           />
         </div>
@@ -82,6 +83,7 @@ export function ProductCard({
             fullWidth
             variant="outline"
             message={productWhatsappMessage(product.title)}
+            number={siteConfig.whatsapp.productNumber}
           >
             Send on WhatsApp
           </WhatsAppButton>

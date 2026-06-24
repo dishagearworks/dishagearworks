@@ -35,9 +35,11 @@ export const siteConfig = {
     { display: "+91 98140 42006", href: "tel:+919814042006" },
   ],
 
-  // WhatsApp click-to-chat (conversion). `number` is digits only (wa.me form).
+  // WhatsApp click-to-chat (conversion). Numbers are digits only (wa.me form).
   whatsapp: {
     number: "916283011490",
+    // Dedicated number for product enquiries / quotations.
+    productNumber: "919814042006",
     defaultMessage:
       "Hello DISHA GEARWORKS, I need a quotation for agricultural machinery spare parts. I have a sample/drawing/photo. Please guide me.",
   },

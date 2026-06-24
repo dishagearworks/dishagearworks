@@ -1,9 +1,10 @@
 import { siteConfig } from "@/config/site";
 
-/** Build a wa.me click-to-chat link with a prefilled message. */
-export function whatsappHref(message?: string): string {
+/** Build a wa.me click-to-chat link with a prefilled message and number. */
+export function whatsappHref(message?: string, number?: string): string {
   const text = message ?? siteConfig.whatsapp.defaultMessage;
-  return `https://wa.me/${siteConfig.whatsapp.number}?text=${encodeURIComponent(text)}`;
+  const to = number ?? siteConfig.whatsapp.number;
+  return `https://wa.me/${to}?text=${encodeURIComponent(text)}`;
 }
 
 /** Prefilled WhatsApp message that names a specific product. */
