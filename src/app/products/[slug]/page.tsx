@@ -72,29 +72,30 @@ export default function ProductDetailPage({ params }: Params) {
   const waMessage = productWhatsappMessage(product.title);
   const quoteHref = `/contact?product=${encodeURIComponent(product.title)}`;
 
-  // Product + Breadcrumb + FAQ structured data for rich results.
+  // Structured data for product pages. We intentionally do NOT use Product
+  // schema: this is a B2B page with no fixed price, reviews or ratings, so a
+  // Product node would always trigger Google's "offers/review/aggregateRating"
+  // warning. WebPage + BreadcrumbList + FAQPage are valid without that data,
+  // and the global Organization (#organization) is emitted in the root layout.
   const jsonLd = {
     "@context": "https://schema.org",
     "@graph": [
       {
-        "@type": "Product",
-        "@id": `${canonical}#product`,
-        name: product.title,
-        description: product.description,
-        image: imageUrl,
-        category: "Agricultural Machinery Spare Parts",
-        material: [...siteConfig.materials],
+        "@type": "WebPage",
+        "@id": `${canonical}#webpage`,
         url: canonical,
-        brand: { "@type": "Brand", name: siteConfig.name },
-        manufacturer: { "@id": `${siteConfig.url}/#organization` },
-        additionalProperty: product.features.map((f) => ({
-          "@type": "PropertyValue",
-          name: "Feature",
-          value: f,
-        })),
+        name: product.metaTitle,
+        description: product.metaDescription,
+        inLanguage: "en-IN",
+        isPartOf: { "@id": `${siteConfig.url}/#website` },
+        about: { "@id": `${siteConfig.url}/#organization` },
+        publisher: { "@id": `${siteConfig.url}/#organization` },
+        primaryImageOfPage: imageUrl,
+        breadcrumb: { "@id": `${canonical}#breadcrumb` },
       },
       {
         "@type": "BreadcrumbList",
+        "@id": `${canonical}#breadcrumb`,
         itemListElement: [
           { "@type": "ListItem", position: 1, name: "Home", item: siteConfig.url },
           { "@type": "ListItem", position: 2, name: "Products", item: `${siteConfig.url}/products` },
