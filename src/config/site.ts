@@ -56,7 +56,7 @@ export const siteConfig = {
   // Official social/profile URLs for Organization `sameAs`. Add only REAL
   // profiles (no invented links). Empty values are ignored.
   social: {
-    instagram: "", // e.g. https://www.instagram.com/<your-handle>
+    instagram: "https://www.instagram.com/disha.gearworks",
   },
 
   // ---- Materials we work with (from brochure) ---------------------------
