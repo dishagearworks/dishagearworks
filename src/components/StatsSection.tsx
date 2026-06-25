@@ -22,7 +22,10 @@ function Counter({ value }: { value: string }) {
   const prefix = m ? m[1] : "";
   const target = m ? parseInt(m[2], 10) : 0;
   const suffix = m ? m[3] : value;
-  const [n, setN] = useState(0);
+  // Initialise to the FINAL value so the real number is in the server-rendered
+  // HTML (crawlers / no-JS users never see "0"). The count-up animation, for
+  // JS users only, briefly resets to 0 and eases up to the target.
+  const [n, setN] = useState(target);
 
   useEffect(() => {
     if (!inView) return;
@@ -36,6 +39,7 @@ function Counter({ value }: { value: string }) {
     let raf = 0;
     const dur = 1400;
     const start = performance.now();
+    setN(0); // begin the count-up from zero
     const tick = (t: number) => {
       const p = Math.min(1, (t - start) / dur);
       const eased = 1 - Math.pow(1 - p, 3);
@@ -45,14 +49,6 @@ function Counter({ value }: { value: string }) {
     raf = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(raf);
   }, [inView, target]);
-
-  // Safety net: guarantee the final value is shown even if the viewport
-  // observer never fires or the animation is interrupted (some mobile
-  // browsers / in-app webviews). The number can never stay stuck below target.
-  useEffect(() => {
-    const id = setTimeout(() => setN((cur) => (cur < target ? target : cur)), 1500);
-    return () => clearTimeout(id);
-  }, [target]);
 
   return (
     <span ref={ref}>

@@ -23,7 +23,7 @@ function Logo() {
           alt="DISHA GEARWORKS"
           width={180}
           height={80}
-          priority
+          loading="eager"
           className="h-10 w-auto sm:h-11"
         />
       </span>

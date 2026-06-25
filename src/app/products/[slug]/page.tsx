@@ -9,6 +9,7 @@ import { SmartImage } from "@/components/PlaceholderImage";
 import { QuoteButton } from "@/components/QuoteButton";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { SampleDrawingCTA } from "@/components/SampleDrawingCTA";
+import { JsonLd } from "@/components/JsonLd";
 import { FadeIn, StaggerContainer, StaggerItem } from "@/components/motion/FadeIn";
 import { CheckIcon } from "@/components/icons";
 import {
@@ -116,10 +117,7 @@ export default function ProductDetailPage({ params }: Params) {
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+      <JsonLd data={jsonLd} />
 
       <PageBanner
         title={product.heading}

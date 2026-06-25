@@ -53,6 +53,12 @@ export const siteConfig = {
   businessType: "Manufacturer of Agricultural Machinery Spare Parts",
   industry: "Agricultural Machinery Spare Parts Manufacturing",
 
+  // Official social/profile URLs for Organization `sameAs`. Add only REAL
+  // profiles (no invented links). Empty values are ignored.
+  social: {
+    instagram: "", // e.g. https://www.instagram.com/<your-handle>
+  },
+
   // ---- Materials we work with (from brochure) ---------------------------
   materials: [
     "Carbon Steel",
@@ -97,6 +103,7 @@ export const navLinks = [
   { label: "About Us", href: "/about" },
   { label: "Products", href: "/products" },
   { label: "Manufacturing Capabilities", href: "/capabilities" },
+  { label: "Export", href: "/export" },
   { label: "Gallery", href: "/gallery" },
   { label: "Contact", href: "/contact" },
 ] as const;

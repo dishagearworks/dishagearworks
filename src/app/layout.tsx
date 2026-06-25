@@ -6,6 +6,7 @@ import { Footer } from "@/components/Footer";
 import { Providers } from "@/components/Providers";
 import { ScrollProgress } from "@/components/ScrollProgress";
 import { WhatsAppFloat } from "@/components/WhatsAppFloat";
+import { JsonLd } from "@/components/JsonLd";
 import { siteConfig } from "@/config/site";
 
 // Headings: a tight technical grotesk for a precise, engineered feel.
@@ -112,6 +113,8 @@ export default function RootLayout({
     postalCode: "147201",
     addressCountry: "IN",
   };
+  // Real social/profile URLs only (empty values filtered out).
+  const sameAs = Object.values(siteConfig.social).filter(Boolean);
   const jsonLd = {
     "@context": "https://schema.org",
     "@graph": [
@@ -123,12 +126,13 @@ export default function RootLayout({
         description: siteConfig.description,
         foundingDate: String(siteConfig.since),
         email: siteConfig.email,
-        telephone: siteConfig.phone,
+        telephone: [siteConfig.phones[0].display, siteConfig.phones[1].display],
         url: siteConfig.url,
         logo: `${siteConfig.url}/logo.png`,
         image: `${siteConfig.url}${siteConfig.ogImage}`,
         slogan: siteConfig.tagline,
         address: postalAddress,
+        ...(sameAs.length ? { sameAs } : {}),
       },
       {
         "@type": "LocalBusiness",
@@ -137,7 +141,7 @@ export default function RootLayout({
         description: siteConfig.description,
         url: siteConfig.url,
         email: siteConfig.email,
-        telephone: siteConfig.phone,
+        telephone: [siteConfig.phones[0].display, siteConfig.phones[1].display],
         image: `${siteConfig.url}${siteConfig.ogImage}`,
         logo: `${siteConfig.url}/logo.png`,
         priceRange: "$$",
@@ -149,10 +153,8 @@ export default function RootLayout({
           latitude: siteConfig.geo.latitude,
           longitude: siteConfig.geo.longitude,
         },
-        areaServed: [
-          { "@type": "Country", name: "India" },
-          { "@type": "Place", name: "Worldwide (Export)" },
-        ],
+        areaServed: { "@type": "Country", name: "India" },
+        ...(sameAs.length ? { sameAs } : {}),
         knowsAbout: [...siteConfig.keywords],
         openingHoursSpecification: {
           "@type": "OpeningHoursSpecification",
@@ -182,10 +184,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${heading.variable} ${inter.variable} ${mono.variable}`}>
       <body className="flex min-h-screen flex-col">
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
+        <JsonLd data={jsonLd} />
         <Providers>
           <ScrollProgress />
           <Navbar />
