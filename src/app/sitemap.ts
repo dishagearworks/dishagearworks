@@ -22,6 +22,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
+  // SEO landing pages (not in the main nav).
+  const landingPages: MetadataRoute.Sitemap = [
+    {
+      url: `${siteConfig.url}/combine-harvester-spare-parts-manufacturer`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.9,
+    },
+  ];
+
   // Resources hub + articles.
   const resourcesHub: MetadataRoute.Sitemap = [
     {
@@ -38,5 +48,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.5,
   }));
 
-  return [...pages, ...productPages, ...resourcesHub, ...articlePages];
+  return [...pages, ...landingPages, ...productPages, ...resourcesHub, ...articlePages];
 }

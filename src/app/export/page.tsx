@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { PageBanner } from "@/components/PageBanner";
 import { SectionHeading } from "@/components/SectionHeading";
 import { CTASection } from "@/components/CTASection";
@@ -127,6 +128,16 @@ export default function ExportPage() {
                 International buyers can send a sample, drawing or photo for review. We
                 will respond with a quotation, materials and lead time so you can plan
                 your sourcing with confidence.
+              </p>
+              <p>
+                Read more about our work as a{" "}
+                <Link
+                  href="/combine-harvester-spare-parts-manufacturer"
+                  className="font-medium text-orange transition-colors hover:text-orange-300"
+                >
+                  combine harvester spare parts manufacturer
+                </Link>
+                .
               </p>
             </div>
             <div className="mt-8 flex flex-wrap gap-4">

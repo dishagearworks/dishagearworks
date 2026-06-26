@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { PageBanner } from "@/components/PageBanner";
 import { CapabilityCard } from "@/components/CapabilityCard";
 import { SectionHeading } from "@/components/SectionHeading";
@@ -128,6 +129,16 @@ export default function CapabilitiesPage() {
               </StaggerItem>
             ))}
           </StaggerContainer>
+          <p className="mt-10 text-sm text-slate-500">
+            These capabilities power our work as a{" "}
+            <Link
+              href="/combine-harvester-spare-parts-manufacturer"
+              className="font-medium text-orange transition-colors hover:text-orange-300"
+            >
+              combine harvester spare parts manufacturer
+            </Link>{" "}
+            for OEM, replacement and export requirements.
+          </p>
         </div>
       </section>
 

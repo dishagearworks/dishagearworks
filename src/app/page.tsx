@@ -51,6 +51,16 @@ export default function HomePage() {
             <QuoteButton href="/products" variant="secondary">
               View All Products
             </QuoteButton>
+            <p className="mt-5 text-sm text-slate-500">
+              Sourcing in volume? See why we&apos;re a trusted{" "}
+              <Link
+                href="/combine-harvester-spare-parts-manufacturer"
+                className="font-medium text-orange transition-colors hover:text-orange-300"
+              >
+                combine harvester spare parts manufacturer
+              </Link>
+              .
+            </p>
           </div>
         </div>
       </section>

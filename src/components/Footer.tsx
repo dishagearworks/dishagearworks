@@ -76,6 +76,14 @@ export function Footer() {
                 Resources
               </Link>
             </li>
+            <li>
+              <Link
+                href="/combine-harvester-spare-parts-manufacturer"
+                className="text-sm text-steel transition-colors hover:text-orange"
+              >
+                Combine Harvester Spare Parts Manufacturer
+              </Link>
+            </li>
           </ul>
         </div>
 

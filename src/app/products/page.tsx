@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { PageBanner } from "@/components/PageBanner";
 import { ProductCard } from "@/components/ProductCard";
 import { CTASection } from "@/components/CTASection";
@@ -34,6 +35,17 @@ export default function ProductsPage() {
           <h2 id="product-range-heading" className="sr-only">
             Our complete range of agricultural machinery spare parts
           </h2>
+          <p className="mb-10 max-w-3xl text-base leading-relaxed text-slate-600">
+            As a{" "}
+            <Link
+              href="/combine-harvester-spare-parts-manufacturer"
+              className="font-medium text-orange transition-colors hover:text-orange-300"
+            >
+              combine harvester spare parts manufacturer
+            </Link>{" "}
+            in Punjab, India, we make every component below to standard or
+            custom requirement — as per sample, drawing or product photo.
+          </p>
           <StaggerContainer className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {products.map((p, i) => (
               <StaggerItem key={p.slug} className="h-full">
