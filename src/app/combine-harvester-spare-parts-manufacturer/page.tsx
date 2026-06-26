@@ -111,6 +111,10 @@ const faqs: { q: string; a: string }[] = [
     a: "Yes. DISHA GEARWORKS manufactures combine harvester spare parts and agricultural machinery components in Nabha, Punjab, India, with manufacturing experience since 1976.",
   },
   {
+    q: "Are you a combine harvester spare part manufacturer in India?",
+    a: "Yes. DISHA GEARWORKS is a combine harvester spare part manufacturer in India, supplying durable spare parts and custom CNC machined components for agricultural machinery applications.",
+  },
+  {
     q: "Can you manufacture combine harvester parts as per sample or drawing?",
     a: "Yes. We manufacture as per sample, technical drawing, CAD file or product photo, including old or discontinued parts through reverse engineering.",
   },
@@ -133,6 +137,10 @@ const faqs: { q: string; a: string }[] = [
   {
     q: "Do you supply parts outside Punjab and India?",
     a: "We supply customers across India and welcome export enquiries from international buyers, OEMs, dealers and importers.",
+  },
+  {
+    q: "Do you supply to dealers, distributors and export buyers?",
+    a: "Yes. We supply OEMs, dealers, distributors, traders, repair workshops and bulk buyers, and we welcome export enquiries from international buyers and importers.",
   },
   {
     q: "What materials do you use for agricultural machinery spare parts?",
@@ -236,6 +244,11 @@ export default function Page() {
             Machinery
           </h2>
           <div className="mt-5 space-y-4 text-base leading-relaxed text-slate-600">
+            <p>
+              DISHA GEARWORKS is a combine harvester spare part manufacturer in
+              India, supplying durable spare parts and custom CNC machined
+              components for agricultural machinery applications.
+            </p>
             <p>
               As an established combine harvester spare parts manufacturer in
               India, DISHA GEARWORKS produces precision components using modern
@@ -461,6 +474,79 @@ export default function Page() {
             </Link>
             .
           </p>
+        </div>
+      </section>
+
+      {/* QUALITY CHECKS */}
+      <section className="bg-steel-light py-16 sm:py-20">
+        <div className="container-x">
+          <span className={eyebrow}>
+            <span className="h-px w-6 bg-orange" /> Quality
+          </span>
+          <h2 className={h2}>Quality Checks Before Dispatch</h2>
+          <p className="mt-5 max-w-3xl text-base leading-relaxed text-slate-600">
+            DISHA GEARWORKS follows a practical, hands-on quality process. Parts
+            are checked at the relevant stages and given a final inspection
+            before dispatch, so components arrive ready to fit.
+          </p>
+          <ul className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {[
+              "Dimensional inspection",
+              "Bore and keyway checking",
+              "Fitment checking",
+              "Surface finish checking",
+              "Assembly checking where applicable",
+              "Material selection as per application",
+              "Batch consistency checks",
+              "Final inspection before dispatch",
+            ].map((q) => (
+              <li key={q} className="flex items-start gap-2.5 text-sm text-navy">
+                <CheckIcon className="mt-0.5 h-4 w-4 shrink-0 text-orange" />
+                {q}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      {/* HOW TO SEND REQUIREMENT */}
+      <section className="bg-white py-16 sm:py-20">
+        <div className="container-x">
+          <span className={eyebrow}>
+            <span className="h-px w-6 bg-orange" /> How to Order
+          </span>
+          <h2 className={h2}>How to Send Your Requirement</h2>
+          <p className="mt-5 max-w-3xl text-base leading-relaxed text-slate-600">
+            Getting a quotation is simple. Whether you are an OEM, dealer,
+            distributor, trader, repair workshop, bulk buyer or export buyer,
+            the process is the same.
+          </p>
+          <ol className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {[
+              "Share product photo, sample, drawing, CAD file or dimensions",
+              "Mention quantity, material requirement and application",
+              "Our team reviews manufacturing feasibility",
+              "We share quotation and estimated lead time",
+              "Production starts after confirmation",
+              "Final inspection and dispatch",
+            ].map((step, i) => (
+              <li
+                key={step}
+                className="relative h-full rounded-2xl border border-navy/10 bg-steel-light/40 p-6"
+              >
+                <span className="font-heading text-3xl font-bold text-orange/25">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <p className="mt-2 text-sm leading-relaxed text-navy">{step}</p>
+              </li>
+            ))}
+          </ol>
+          <div className="mt-9 flex flex-wrap gap-4">
+            <QuoteButton href="/contact" size="lg">
+              Request a Quote
+            </QuoteButton>
+            <WhatsAppButton size="lg">Send Drawing / Product Photo</WhatsAppButton>
+          </div>
         </div>
       </section>
 

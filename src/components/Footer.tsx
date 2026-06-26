@@ -131,15 +131,21 @@ export function Footer() {
             </li>
             <li className="flex gap-3">
               <PhoneIcon className="mt-0.5 h-5 w-5 shrink-0 text-orange" />
-              <span className="flex flex-col gap-1">
-                {siteConfig.phones.map((p) => (
-                  <a
-                    key={p.href}
-                    href={p.href}
-                    className="whitespace-nowrap transition-colors hover:text-orange"
-                  >
-                    {p.display}
-                  </a>
+              <span className="flex flex-wrap items-center gap-x-2 gap-y-1">
+                {siteConfig.phones.map((p, i) => (
+                  <span key={p.href} className="flex items-center gap-x-2">
+                    {i > 0 && (
+                      <span aria-hidden className="text-steel/40">
+                        |
+                      </span>
+                    )}
+                    <a
+                      href={p.href}
+                      className="whitespace-nowrap transition-colors hover:text-orange"
+                    >
+                      {p.display}
+                    </a>
+                  </span>
                 ))}
               </span>
             </li>
