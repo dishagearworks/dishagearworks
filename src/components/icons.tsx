@@ -215,6 +215,14 @@ export const CubeIcon = (props: IconProps) => (
   </svg>
 );
 
+export const InstagramIcon = (props: IconProps) => (
+  <svg {...base(props)}>
+    <rect x="3" y="3" width="18" height="18" rx="5" />
+    <circle cx="12" cy="12" r="4" />
+    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+  </svg>
+);
+
 // WhatsApp is a filled brand glyph (not a stroke icon), so it has its own svg.
 export const WhatsAppIcon = (props: IconProps) => (
   <svg

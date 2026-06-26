@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { siteConfig, navLinks } from "@/config/site";
 import { products } from "@/config/products";
-import { GearIcon, MailIcon, MapPinIcon, PhoneIcon } from "./icons";
+import { GearIcon, MailIcon, MapPinIcon, PhoneIcon, InstagramIcon } from "./icons";
 
 export function Footer() {
   const year = new Date().getFullYear();
@@ -35,6 +35,21 @@ export function Footer() {
           <span className="label-mono mt-6 inline-flex items-center gap-2 rounded-sm border border-orange/30 bg-orange/10 px-3 py-1.5 text-orange">
             <GearIcon className="h-4 w-4" /> Since {siteConfig.since}
           </span>
+
+          {siteConfig.social.instagram && (
+            <div className="mt-6">
+              <p className="label-mono text-steel">Follow us</p>
+              <a
+                href={siteConfig.social.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="DISHA GEARWORKS on Instagram"
+                className="group mt-3 inline-flex h-11 w-11 items-center justify-center rounded-lg border border-white/15 text-steel transition-colors hover:border-orange hover:text-orange"
+              >
+                <InstagramIcon className="h-5 w-5" />
+              </a>
+            </div>
+          )}
         </div>
 
         {/* Quick links */}
