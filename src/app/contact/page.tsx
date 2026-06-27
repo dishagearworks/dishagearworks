@@ -6,6 +6,7 @@ import { SectionHeading } from "@/components/SectionHeading";
 import { FadeIn } from "@/components/motion/FadeIn";
 import { MailIcon, MapPinIcon, PhoneIcon, Icon } from "@/components/icons";
 import { JsonLd } from "@/components/JsonLd";
+import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { siteConfig } from "@/config/site";
 import { pageGraph } from "@/lib/schema";
 
@@ -131,6 +132,13 @@ export default function ContactPage() {
                     {siteConfig.businessType}
                   </p>
                 </div>
+              </div>
+
+              {/* Prefer chat? One-tap WhatsApp */}
+              <div className="mt-5">
+                <WhatsAppButton fullWidth>
+                  Chat on WhatsApp
+                </WhatsAppButton>
               </div>
             </FadeIn>
           </div>

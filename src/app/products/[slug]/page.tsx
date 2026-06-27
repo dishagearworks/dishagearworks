@@ -181,6 +181,24 @@ export default function ProductDetailPage({ params }: Params) {
               </WhatsAppButton>
             </div>
 
+            {/* Trust signals — reassure dealers, OEMs and importers at the CTA */}
+            <ul className="mt-6 flex flex-wrap gap-x-5 gap-y-2">
+              {[
+                `Manufacturer since ${siteConfig.since}`,
+                `${siteConfig.repeatClients} repeat clients`,
+                "Inspected before dispatch",
+                "Made as per sample or drawing",
+              ].map((t) => (
+                <li
+                  key={t}
+                  className="inline-flex items-center gap-1.5 text-xs font-medium text-navy"
+                >
+                  <CheckIcon className="h-3.5 w-3.5 shrink-0 text-orange" />
+                  {t}
+                </li>
+              ))}
+            </ul>
+
             <p className="mt-6 text-sm text-slate-500">
               Need this part to a custom drawing or sample?{" "}
               <Link
