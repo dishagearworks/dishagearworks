@@ -3,6 +3,8 @@ import { PageBanner } from "@/components/PageBanner";
 import { GalleryGrid } from "@/components/GalleryGrid";
 import { CTASection } from "@/components/CTASection";
 import { siteConfig } from "@/config/site";
+import { JsonLd } from "@/components/JsonLd";
+import { pageGraph } from "@/lib/schema";
 
 export const metadata: Metadata = {
   title: "Gallery — Factory, CNC Machining & Finished Components",
@@ -21,6 +23,19 @@ export const metadata: Metadata = {
 export default function GalleryPage() {
   return (
     <>
+      <JsonLd
+        data={pageGraph({
+          path: "/gallery",
+          name: "Gallery | DISHA GEARWORKS",
+          description:
+            "Factory, workshop and finished agricultural machinery components manufactured by DISHA GEARWORKS.",
+          type: "CollectionPage",
+          breadcrumbs: [
+            { name: "Home", path: "/" },
+            { name: "Gallery", path: "/gallery" },
+          ],
+        })}
+      />
       <PageBanner
         title="Gallery"
         subtitle="A look inside our factory — machines, workshop and manufacturing in progress. Tap any photo or video to view it up close."

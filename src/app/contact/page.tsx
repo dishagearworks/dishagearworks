@@ -5,7 +5,9 @@ import { InquiryForm } from "@/components/InquiryForm";
 import { SectionHeading } from "@/components/SectionHeading";
 import { FadeIn } from "@/components/motion/FadeIn";
 import { MailIcon, MapPinIcon, PhoneIcon, Icon } from "@/components/icons";
+import { JsonLd } from "@/components/JsonLd";
 import { siteConfig } from "@/config/site";
+import { pageGraph } from "@/lib/schema";
 
 export const metadata: Metadata = {
   title: "Contact — Request a Quote for Agricultural Machinery Parts",
@@ -57,6 +59,19 @@ const details = [
 export default function ContactPage() {
   return (
     <>
+      <JsonLd
+        data={pageGraph({
+          path: "/contact",
+          name: "Contact | DISHA GEARWORKS",
+          description:
+            "Contact DISHA GEARWORKS for agricultural machinery spare parts — Patiala Road, Nabha, Punjab, India.",
+          type: "ContactPage",
+          breadcrumbs: [
+            { name: "Home", path: "/" },
+            { name: "Contact", path: "/contact" },
+          ],
+        })}
+      />
       <PageBanner
         title="Get in Touch"
         subtitle="Tell us your requirements and our team will respond with a quotation and lead time. We welcome both domestic and export inquiries."

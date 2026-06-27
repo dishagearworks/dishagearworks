@@ -6,6 +6,8 @@ import { CTASection } from "@/components/CTASection";
 import { StaggerContainer, StaggerItem } from "@/components/motion/FadeIn";
 import { products } from "@/config/products";
 import { siteConfig } from "@/config/site";
+import { JsonLd } from "@/components/JsonLd";
+import { pageGraph } from "@/lib/schema";
 
 export const metadata: Metadata = {
   title: "Products — Gearbox Assemblies, Sprockets, Pulleys & CNC Parts",
@@ -24,6 +26,19 @@ export const metadata: Metadata = {
 export default function ProductsPage() {
   return (
     <>
+      <JsonLd
+        data={pageGraph({
+          path: "/products",
+          name: "Products | DISHA GEARWORKS",
+          description:
+            "Agricultural machinery spare parts and assemblies manufactured by DISHA GEARWORKS.",
+          type: "CollectionPage",
+          breadcrumbs: [
+            { name: "Home", path: "/" },
+            { name: "Products", path: "/products" },
+          ],
+        })}
+      />
       <PageBanner
         title="Our Products"
         subtitle="A complete range of precision spare parts and assemblies for combine harvesters and agricultural machinery. Request a quote on any product below."

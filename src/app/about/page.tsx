@@ -6,7 +6,9 @@ import { CTASection } from "@/components/CTASection";
 import { SmartImage } from "@/components/PlaceholderImage";
 import { FadeIn, StaggerContainer, StaggerItem } from "@/components/motion/FadeIn";
 import { Icon, CheckIcon } from "@/components/icons";
+import { JsonLd } from "@/components/JsonLd";
 import { siteConfig } from "@/config/site";
+import { pageGraph } from "@/lib/schema";
 
 export const metadata: Metadata = {
   title: "About Us — Manufacturing Legacy Since 1976",
@@ -52,6 +54,19 @@ const highlights = [
 export default function AboutPage() {
   return (
     <>
+      <JsonLd
+        data={pageGraph({
+          path: "/about",
+          name: "About Us | DISHA GEARWORKS",
+          description:
+            "DISHA GEARWORKS is a Punjab-based manufacturer of precision agricultural machinery spare parts since 1976.",
+          type: "AboutPage",
+          breadcrumbs: [
+            { name: "Home", path: "/" },
+            { name: "About Us", path: "/about" },
+          ],
+        })}
+      />
       <PageBanner
         title="A manufacturing legacy since 1976"
         subtitle="Precision agricultural machinery components, engineered in Punjab and trusted across India and beyond."

@@ -10,6 +10,8 @@ import { FadeIn, StaggerContainer, StaggerItem } from "@/components/motion/FadeI
 import { CheckIcon } from "@/components/icons";
 import { capabilities } from "@/config/capabilities";
 import { siteConfig } from "@/config/site";
+import { JsonLd } from "@/components/JsonLd";
+import { pageGraph } from "@/lib/schema";
 
 export const metadata: Metadata = {
   title: "Manufacturing Capabilities — CNC Turning, VMC Milling & OEM",
@@ -35,6 +37,18 @@ const process = [
 export default function CapabilitiesPage() {
   return (
     <>
+      <JsonLd
+        data={pageGraph({
+          path: "/capabilities",
+          name: "Manufacturing Capabilities | DISHA GEARWORKS",
+          description:
+            "CNC turning, VMC milling, precision machining and OEM/contract manufacturing for agricultural machinery components.",
+          breadcrumbs: [
+            { name: "Home", path: "/" },
+            { name: "Manufacturing Capabilities", path: "/capabilities" },
+          ],
+        })}
+      />
       <PageBanner
         title="Manufacturing Capabilities"
         subtitle="Modern CNC machining and end-to-end manufacturing services for agricultural machinery components — all under one roof."

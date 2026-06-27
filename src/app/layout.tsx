@@ -132,6 +132,14 @@ export default function RootLayout({
         image: `${siteConfig.url}${siteConfig.ogImage}`,
         slogan: siteConfig.tagline,
         address: postalAddress,
+        contactPoint: {
+          "@type": "ContactPoint",
+          contactType: "sales",
+          telephone: [siteConfig.phones[0].display, siteConfig.phones[1].display],
+          email: siteConfig.email,
+          areaServed: "IN",
+          availableLanguage: ["en", "hi", "pa"],
+        },
         ...(sameAs.length ? { sameAs } : {}),
       },
       {
