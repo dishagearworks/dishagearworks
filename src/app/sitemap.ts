@@ -24,13 +24,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   // SEO landing pages (not in the main nav).
   const landingPages: MetadataRoute.Sitemap = [
-    {
-      url: `${siteConfig.url}/combine-harvester-spare-parts-manufacturer`,
-      lastModified: now,
-      changeFrequency: "monthly",
-      priority: 0.9,
-    },
-  ];
+    "/combine-harvester-spare-parts-manufacturer",
+    "/combine-harvester-gearbox-assembly-manufacturer",
+    "/oem-contract-manufacturing",
+  ].map((p) => ({
+    url: `${siteConfig.url}${p}`,
+    lastModified: now,
+    changeFrequency: "monthly",
+    priority: 0.9,
+  }));
 
   // Resources hub + articles.
   const resourcesHub: MetadataRoute.Sitemap = [

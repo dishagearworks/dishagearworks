@@ -56,6 +56,53 @@ export default function ProductsPage() {
         </div>
       </section>
 
+      {/* Explore manufacturing categories — SEO landing pages */}
+      <section className="bg-steel-light py-16 sm:py-20" aria-labelledby="categories-heading">
+        <div className="container-x">
+          <h2
+            id="categories-heading"
+            className="font-heading text-2xl font-bold text-navy sm:text-3xl"
+          >
+            Explore Manufacturing Categories
+          </h2>
+          <div className="mt-8 grid gap-4 sm:grid-cols-3">
+            {[
+              {
+                href: "/combine-harvester-spare-parts-manufacturer",
+                label: "Combine Harvester Spare Parts Manufacturer",
+                text: "Our full range of combine harvester and agricultural machinery spare parts.",
+              },
+              {
+                href: "/combine-harvester-gearbox-assembly-manufacturer",
+                label: "Gearbox Assembly Manufacturer",
+                text: "4 speed, 5 speed GDR and reduction body full assemblies.",
+              },
+              {
+                href: "/oem-contract-manufacturing",
+                label: "OEM & Contract Manufacturing",
+                text: "Components made to your drawing or sample for OEMs and B2B buyers.",
+              },
+            ].map((c) => (
+              <Link
+                key={c.href}
+                href={c.href}
+                className="group flex h-full flex-col rounded-lg border border-navy/10 bg-white p-6 shadow-card transition-all duration-300 hover:-translate-y-1 hover:border-orange/40 hover:shadow-cardHover"
+              >
+                <h3 className="font-heading text-base font-semibold leading-snug text-navy transition-colors group-hover:text-orange">
+                  {c.label}
+                </h3>
+                <p className="mt-2 flex-1 text-sm leading-relaxed text-slate-600">
+                  {c.text}
+                </p>
+                <span className="mt-4 inline-flex items-center gap-2 font-heading text-sm font-semibold text-orange">
+                  Learn more →
+                </span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <CTASection
         title="Need a custom component?"
         titleHighlight=""

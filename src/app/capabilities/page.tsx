@@ -137,7 +137,14 @@ export default function CapabilitiesPage() {
             >
               combine harvester spare parts manufacturer
             </Link>{" "}
-            for OEM, replacement and export requirements.
+            and support{" "}
+            <Link
+              href="/oem-contract-manufacturing"
+              className="font-medium text-orange transition-colors hover:text-orange-300"
+            >
+              OEM &amp; contract manufacturing
+            </Link>{" "}
+            for replacement and export requirements.
           </p>
         </div>
       </section>

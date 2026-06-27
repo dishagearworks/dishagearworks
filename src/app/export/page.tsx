@@ -136,8 +136,15 @@ export default function ExportPage() {
                   className="font-medium text-orange transition-colors hover:text-orange-300"
                 >
                   combine harvester spare parts manufacturer
-                </Link>
-                .
+                </Link>{" "}
+                and our{" "}
+                <Link
+                  href="/oem-contract-manufacturing"
+                  className="font-medium text-orange transition-colors hover:text-orange-300"
+                >
+                  OEM &amp; contract manufacturing
+                </Link>{" "}
+                support.
               </p>
             </div>
             <div className="mt-8 flex flex-wrap gap-4">

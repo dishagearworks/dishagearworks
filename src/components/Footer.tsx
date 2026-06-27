@@ -84,6 +84,22 @@ export function Footer() {
                 Combine Harvester Spare Parts Manufacturer
               </Link>
             </li>
+            <li>
+              <Link
+                href="/combine-harvester-gearbox-assembly-manufacturer"
+                className="text-sm text-steel transition-colors hover:text-orange"
+              >
+                Gearbox Assembly Manufacturer
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/oem-contract-manufacturing"
+                className="text-sm text-steel transition-colors hover:text-orange"
+              >
+                OEM &amp; Contract Manufacturing
+              </Link>
+            </li>
           </ul>
         </div>
 

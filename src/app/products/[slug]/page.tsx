@@ -73,6 +73,24 @@ export default function ProductDetailPage({ params }: Params) {
   const waMessage = productWhatsappMessage(product.title);
   const quoteHref = `/contact?product=${encodeURIComponent(product.title)}`;
 
+  // "Up" link to the relevant category/landing hub for internal linking.
+  const gearboxSlugs = [
+    "4-speed-gdr-gearbox-assembly",
+    "5-speed-gdr-gearbox-assembly",
+    "reduction-body-assembly",
+  ];
+  const categoryHub = gearboxSlugs.includes(product.slug)
+    ? {
+        href: "/combine-harvester-gearbox-assembly-manufacturer",
+        label: "combine harvester gearbox assembly manufacturer",
+      }
+    : product.slug === "custom-cnc-components"
+      ? { href: "/oem-contract-manufacturing", label: "OEM & contract manufacturing" }
+      : {
+          href: "/combine-harvester-spare-parts-manufacturer",
+          label: "combine harvester spare parts manufacturer",
+        };
+
   // Structured data for product pages. We intentionally do NOT use Product
   // schema: this is a B2B page with no fixed price, reviews or ratings, so a
   // Product node would always trigger Google's "offers/review/aggregateRating"
@@ -172,6 +190,16 @@ export default function ProductDetailPage({ params }: Params) {
                 See our manufacturing capabilities
               </Link>
               .
+            </p>
+            <p className="mt-2 text-sm text-slate-500">
+              Explore our{" "}
+              <Link
+                href={categoryHub.href}
+                className="font-medium text-orange transition-colors hover:text-orange-300"
+              >
+                {categoryHub.label}
+              </Link>{" "}
+              page.
             </p>
           </div>
         </div>
