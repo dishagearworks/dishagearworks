@@ -6,8 +6,12 @@ declare global {
   }
 }
 
-/** GA4 Measurement ID (e.g. G-XXXXXXXXXX). Set NEXT_PUBLIC_GA_ID to enable. */
-export const GA_ID = process.env.NEXT_PUBLIC_GA_ID || "";
+/**
+ * GA4 Measurement ID. Defaults to the DISHA GEARWORKS property; override with
+ * NEXT_PUBLIC_GA_ID if needed. (A GA Measurement ID is public — it's exposed
+ * in the page source on every GA-enabled site — so it's safe to keep here.)
+ */
+export const GA_ID = process.env.NEXT_PUBLIC_GA_ID || "G-D990Y1P4VZ";
 
 /**
  * Fire a GA4 event. Safe no-op when GA isn't configured or on the server,
