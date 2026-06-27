@@ -7,6 +7,7 @@ import { siteConfig } from "@/config/site";
 import { QuoteButton } from "./QuoteButton";
 import { CheckIcon } from "./icons";
 import { products } from "@/config/products";
+import { track } from "@/lib/analytics";
 
 type Status = "idle" | "submitting" | "success" | "error";
 
@@ -58,6 +59,10 @@ export function InquiryForm() {
       const data = await res.json().catch(() => ({}));
       if (res.ok && data.ok) {
         setStatus("success");
+        track("generate_lead_form_submit", {
+          form: "contact_inquiry",
+          product: payload.product || undefined,
+        });
       } else {
         setStatus("error");
         setErrorMsg(

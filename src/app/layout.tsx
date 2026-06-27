@@ -7,6 +7,7 @@ import { Providers } from "@/components/Providers";
 import { ScrollProgress } from "@/components/ScrollProgress";
 import { WhatsAppFloat } from "@/components/WhatsAppFloat";
 import { JsonLd } from "@/components/JsonLd";
+import { Analytics } from "@/components/Analytics";
 import { siteConfig } from "@/config/site";
 
 // Headings: a tight technical grotesk for a precise, engineered feel.
@@ -193,6 +194,7 @@ export default function RootLayout({
     <html lang="en" className={`${heading.variable} ${inter.variable} ${mono.variable}`}>
       <body className="flex min-h-screen flex-col">
         <JsonLd data={jsonLd} />
+        <Analytics />
         <Providers>
           <ScrollProgress />
           <Navbar />
