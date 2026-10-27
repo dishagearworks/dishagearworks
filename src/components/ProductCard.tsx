@@ -18,9 +18,12 @@ import type { Product } from "@/config/products";
 export function ProductCard({
   product,
   index,
+  priority = false,
 }: {
   product: Product;
   index?: number;
+  /** eager-load this card's image (use for above-the-fold cards). */
+  priority?: boolean;
 }) {
   return (
     <motion.article
@@ -38,6 +41,8 @@ export function ProductCard({
             src={product.image}
             alt={product.imageAlt}
             label={product.title}
+            priority={priority}
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw"
           />
         </div>
         {/* subtle dark wash on hover — adds depth without hiding the product */}

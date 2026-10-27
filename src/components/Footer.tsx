@@ -170,7 +170,9 @@ export function Footer() {
       </div>
 
       <div className="border-t border-white/10">
-        <div className="container-x flex flex-col items-center justify-between gap-3 py-6 text-xs text-steel sm:flex-row">
+        {/* Extra bottom padding on mobile so the fixed Call/WhatsApp buttons
+            (bottom-right) don't sit over the copyright/location lines. */}
+        <div className="container-x flex flex-col items-center justify-between gap-3 pb-36 pt-6 text-xs text-steel sm:flex-row sm:py-6">
           <p>
             © {year} {siteConfig.name}. All rights reserved.
           </p>

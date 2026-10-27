@@ -6,9 +6,11 @@
   --background: #0b1220;
 }
 
-html {
-  scroll-behavior: smooth;
-}
+/* NOTE: no global `scroll-behavior: smooth` here. When it is set on <html>,
+   Next's App Router scroll-to-top on every navigation animates instead of
+   jumping, which makes navigation feel slow and content appear late. Keep the
+   document scroll instantaneous; opt into smooth scrolling locally where a
+   specific interaction needs it. */
 
 body {
   @apply bg-navy text-white font-body antialiased;
@@ -160,21 +162,9 @@ h1, h2, h3, h4, h5, h6 {
   .reveal-stagger > *:nth-child(8) { animation-delay: 0.46s; }
 }
 
-/* Page-transition (used by app/template.tsx) — transform only, no opacity,
-   so a page can never render blank if the animation gets stuck. */
-@keyframes hl-fade {
-  from {
-    transform: translateY(8px);
-  }
-  to {
-    transform: translateY(0);
-  }
-}
-@media (prefers-reduced-motion: no-preference) {
-  .page-enter {
-    animation: hl-fade 0.4s ease-out both;
-  }
-}
+/* Page-transition animation removed: the App Router `template.tsx` that used
+   it re-mounted the whole tree on every navigation and delayed the content by
+   0.4s. Pages now render instantly on navigation. */
 
 /* Custom selection colour */
 ::selection {

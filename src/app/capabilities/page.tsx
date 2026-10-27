@@ -4,6 +4,7 @@ import { PageBanner } from "@/components/PageBanner";
 import { CapabilityCard } from "@/components/CapabilityCard";
 import { SectionHeading } from "@/components/SectionHeading";
 import { MaterialsSection } from "@/components/MaterialsSection";
+import { IsoCertification } from "@/components/IsoCertification";
 import { CTASection } from "@/components/CTASection";
 import { SmartImage } from "@/components/PlaceholderImage";
 import { FadeIn, StaggerContainer, StaggerItem } from "@/components/motion/FadeIn";
@@ -162,6 +163,8 @@ export default function CapabilitiesPage() {
           </p>
         </div>
       </section>
+
+      <IsoCertification />
 
       <MaterialsSection />
 

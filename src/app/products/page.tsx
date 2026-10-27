@@ -64,7 +64,8 @@ export default function ProductsPage() {
           <StaggerContainer className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {products.map((p, i) => (
               <StaggerItem key={p.slug} className="h-full">
-                <ProductCard product={p} index={i} />
+                {/* first row is above the fold — load eagerly */}
+                <ProductCard product={p} index={i} priority={i < 4} />
               </StaggerItem>
             ))}
           </StaggerContainer>

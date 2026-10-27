@@ -58,7 +58,9 @@ export function GalleryGrid() {
               src={m.type === "image" ? m.src : m.poster}
               alt={m.alt}
               fill
-              loading="lazy"
+              // first row is visible on load → eager; the rest lazy-load as the
+              // visitor scrolls toward them.
+              {...(i < 4 ? { priority: true } : { loading: "lazy" as const })}
               sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
               className="object-cover transition-transform duration-[650ms] ease-out group-hover:scale-105"
             />

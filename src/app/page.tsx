@@ -8,6 +8,8 @@ import { CapabilityCard } from "@/components/CapabilityCard";
 import { WhyChooseUs } from "@/components/WhyChooseUs";
 import { CTASection } from "@/components/CTASection";
 import { SampleDrawingCTA } from "@/components/SampleDrawingCTA";
+import { IsoCertification } from "@/components/IsoCertification";
+import { CustomerLogos } from "@/components/CustomerLogos";
 import { QuoteButton } from "@/components/QuoteButton";
 import { StaggerContainer, StaggerItem } from "@/components/motion/FadeIn";
 import { products } from "@/config/products";
@@ -110,6 +112,8 @@ export default function HomePage() {
       </section>
 
       <WhyChooseUs />
+      <CustomerLogos />
+      <IsoCertification />
       <SampleDrawingCTA />
       <CTASection />
     </>

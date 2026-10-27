@@ -127,6 +127,8 @@ export default function AboutPage() {
                 alt="DISHA GEARWORKS manufacturing facility — CNC machining, foundry and finished components"
                 label="Manufacturing Facility"
                 ratio="aspect-[2/3]"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                priority
               />
             </div>
           </FadeIn>

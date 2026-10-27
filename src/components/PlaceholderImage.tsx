@@ -8,6 +8,11 @@ type PlaceholderImageProps = {
   className?: string;
   /** aspect ratio utility class, e.g. "aspect-[4/3]" */
   ratio?: string;
+  /** responsive `sizes` hint; override per layout so Next serves a variant
+   *  that matches the rendered width (default suits a 3-up grid card). */
+  sizes?: string;
+  /** mark the first/above-the-fold instance as priority (skips lazy-load). */
+  priority?: boolean;
 };
 
 /**
@@ -21,6 +26,8 @@ export function SmartImage({
   label,
   className = "",
   ratio = "aspect-[4/3]",
+  sizes = "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw",
+  priority = false,
 }: PlaceholderImageProps) {
   return (
     <div className={`relative w-full overflow-hidden ${ratio} ${className}`}>
@@ -29,7 +36,8 @@ export function SmartImage({
           src={src}
           alt={alt}
           fill
-          sizes="(max-width: 768px) 100vw, 33vw"
+          sizes={sizes}
+          priority={priority}
           className="object-cover"
         />
       ) : (

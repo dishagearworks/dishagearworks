@@ -155,6 +155,7 @@ export default function ProductDetailPage({ params }: Params) {
               alt={product.imageAlt}
               label={product.title}
               ratio="aspect-[4/3]"
+              sizes="(max-width: 1024px) 100vw, 50vw"
             />
           </div>
 
