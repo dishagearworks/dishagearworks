@@ -7,7 +7,8 @@ import { siteConfig } from "@/config/site";
 import { GearIcon, ShieldIcon, ClockIcon, UsersIcon, ArrowRightIcon } from "./icons";
 
 const POSTER = "/videos/combine-harvest-poster.jpg";
-const VIDEO = "/videos/combine-harvest.mp4";
+const VIDEO = "/videos/combine-harvest.mp4"; // 1280x720 — desktop
+const VIDEO_MOBILE = "/videos/combine-harvest-mobile.mp4"; // 960x540, lighter — phones/tablets
 const MEDIA_ALT = "Aerial view of a combine harvester harvesting a wheat field";
 
 // Exact palette from the brief.
@@ -24,52 +25,48 @@ const trustPoints = [
 ];
 
 /**
- * Full-bleed combine-video hero with scroll-scrubbed playback.
+ * Homepage hero with scroll-scrubbed combine video.
  *
- * Motion devices (desktop, tablet AND phone): the video fills the hero behind
- * the fixed nav and a frosted text panel sits over the "clear field" — on the
- * LEFT at ≥1024px (the approved desktop design), and at the BOTTOM on narrower
- * screens so the combine stays visible above it. The hero is pinned on a tall
- * track; scroll (mouse or touch) scrubs the clip, it holds the final frame,
- * then releases to the Stats bar, and reverses on scroll-up. Normal scroll /
- * touch only — no wheel or gesture trapping.
+ * Desktop (≥1024px): the approved design — full-bleed video behind the nav
+ * with a frosted ivory text panel on the LEFT; pinned + scrubbed, releases to
+ * the Stats bar, reverses on scroll-up. Unchanged.
  *
- * Framing adapts with object-position per breakpoint so the combine (which sits
- * ~two-thirds across the 16:9 frame) is never cropped out in portrait.
+ * Phone / tablet (<1024px, motion, tall enough): the video is a clean full-width
+ * area directly below the nav with NOTHING over it (the complete combine and
+ * header stay visible); that video area is pinned while scroll scrubs the clip,
+ * then releases so the separate warm off-white text section below scrolls into
+ * view. Uses a lighter 540p variant for smoother mobile scrubbing.
  *
- * Reduced-motion, video failure and no-JS: a stacked static poster with the
- * content below, in normal flow (no pinning, no scrubbing) — the server-render
- * default, so the full copy is always present for crawlers and low-end devices.
- *
- * Heights use `svh` so the mobile browser's collapsing toolbar doesn't reflow
- * the pinned section mid-scroll, and scrub progress is derived from element
- * heights (stable) rather than the live innerHeight.
+ * Reduced-motion / video failure / very short viewports (landscape phones) /
+ * no-JS: a stacked static poster with the content below, in normal flow — the
+ * server-render default, so the full copy is always present.
  */
 export function HeroSection() {
   const [enhance, setEnhance] = useState(false); // mounted + motion allowed
+  const [isLg, setIsLg] = useState(false); // desktop-overlay vs mobile-banner layout
   const [short, setShort] = useState(false); // viewport too short to pin cleanly
   const [failed, setFailed] = useState(false);
   const trackRef = useRef<HTMLDivElement>(null);
   const stickyRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
 
-  // Pin + scrub the video everywhere EXCEPT very short viewports (landscape
-  // phones), where a pinned video + full text panel can't fit without clipping
-  // the headline/nav — those fall back to the scrollable stacked layout.
   const active = enhance && !failed && !short;
 
   useEffect(() => {
+    const lg = window.matchMedia("(min-width: 1024px)");
     const rm = window.matchMedia("(prefers-reduced-motion: reduce)");
-    // ~560px is the least height the pinned panel + nav need without clipping.
-    const sv = window.matchMedia("(max-height: 559px)");
+    const sv = window.matchMedia("(max-height: 559px)"); // landscape phones
     const sync = () => {
+      setIsLg(lg.matches);
       setEnhance(!rm.matches);
       setShort(sv.matches);
     };
     sync();
+    lg.addEventListener("change", sync);
     rm.addEventListener("change", sync);
     sv.addEventListener("change", sync);
     return () => {
+      lg.removeEventListener("change", sync);
       rm.removeEventListener("change", sync);
       sv.removeEventListener("change", sync);
     };
@@ -82,8 +79,7 @@ export function HeroSection() {
     const sticky = stickyRef.current;
     if (!video || !track || !sticky) return;
 
-    // Prime decoding so iOS Safari allows frame-accurate currentTime seeking
-    // (muted + inline is required and set on the element).
+    // Prime decoding so iOS Safari allows frame-accurate currentTime seeking.
     video.muted = true;
     video.setAttribute("webkit-playsinline", "true");
     const primed = video.play();
@@ -130,15 +126,15 @@ export function HeroSection() {
       cancelAnimationFrame(raf);
       io.disconnect();
     };
-  }, [active]);
+  }, [active, isLg]);
 
-  // ── Text content (shared). `frosted` = glass panel used in the pinned
-  //    overlay; otherwise the plain block used in the stacked fallback. ──
+  // ── Text content (shared). `frosted` = glass panel (desktop overlay);
+  //    otherwise the plain block used in the warm text section / fallback. ──
   const content = (frosted: boolean) => (
     <div
       className={
         frosted
-          ? "w-full max-w-[560px] rounded-2xl bg-[#FAF7F1]/95 p-5 shadow-[0_24px_60px_-18px_rgba(32,30,27,0.55)] supports-[backdrop-filter]:bg-[#FAF7F1]/[0.88] supports-[backdrop-filter]:backdrop-blur-[12px] sm:p-7 lg:w-[44%] lg:p-8"
+          ? "w-full max-w-[560px] rounded-2xl bg-[#FAF7F1]/95 p-6 shadow-[0_24px_60px_-18px_rgba(32,30,27,0.55)] supports-[backdrop-filter]:bg-[#FAF7F1]/[0.88] supports-[backdrop-filter]:backdrop-blur-[12px] sm:p-8 lg:w-[44%]"
           : "w-full"
       }
     >
@@ -147,7 +143,7 @@ export function HeroSection() {
       </span>
 
       <h1
-        className="mt-2.5 font-heading text-[1.7rem] font-bold leading-[1.08] tracking-tight sm:text-4xl lg:mt-3 lg:text-[2.6rem]"
+        className="mt-3 font-heading text-[1.8rem] font-bold leading-[1.08] tracking-tight sm:text-4xl lg:text-[2.6rem]"
         style={{ color: CHARCOAL }}
       >
         Precision Agricultural Machinery{" "}
@@ -157,16 +153,12 @@ export function HeroSection() {
       </h1>
 
       <span
-        className="mt-3 block h-0.5 w-14 rounded-full lg:mt-4"
+        className="mt-4 block h-0.5 w-14 rounded-full"
         style={{ backgroundColor: COPPER_BTN }}
       />
 
       <p
-        className={`mt-3 max-w-lg text-[15px] leading-relaxed sm:text-base lg:mt-4 ${
-          // keep the pinned phone panel compact; the full copy still ships in
-          // the stacked fallback (SSR) for crawlers and low-end devices.
-          frosted ? "hidden sm:block" : ""
-        }`}
+        className="mt-4 max-w-lg text-[15px] leading-relaxed sm:text-base"
         style={{ color: BODY }}
       >
         Manufacturer of sprockets, pulleys, bearing housings, gears, shafts,
@@ -175,7 +167,7 @@ export function HeroSection() {
         {siteConfig.repeatClients} repeat clients.
       </p>
 
-      <ul className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2 lg:mt-5 lg:gap-y-2.5">
+      <ul className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-2.5">
         {trustPoints.map(({ icon: I, label }, idx) => (
           <li key={label} className="flex items-center gap-3">
             {idx > 0 && (
@@ -196,10 +188,10 @@ export function HeroSection() {
         ))}
       </ul>
 
-      <div className="mt-5 flex flex-wrap gap-3 lg:mt-7">
+      <div className="mt-7 flex flex-wrap gap-3">
         <Link
           href="/contact"
-          className="group inline-flex items-center justify-center gap-2 rounded-md px-6 py-3 font-heading text-[15px] font-medium tracking-tight text-white shadow-[0_10px_24px_-10px_rgba(166,76,34,0.75)] transition-all duration-300 hover:brightness-110 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 sm:px-7 sm:py-3.5"
+          className="group inline-flex items-center justify-center gap-2 rounded-md px-7 py-3.5 font-heading text-[15px] font-medium tracking-tight text-white shadow-[0_10px_24px_-10px_rgba(166,76,34,0.75)] transition-all duration-300 hover:brightness-110 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
           style={{ backgroundColor: COPPER_BTN }}
         >
           Request a Quote
@@ -207,7 +199,7 @@ export function HeroSection() {
         </Link>
         <Link
           href="/products"
-          className="group inline-flex items-center justify-center gap-2 rounded-md px-6 py-3 font-heading text-[15px] font-medium tracking-tight transition-all duration-300 hover:bg-white focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 sm:px-7 sm:py-3.5"
+          className="group inline-flex items-center justify-center gap-2 rounded-md px-7 py-3.5 font-heading text-[15px] font-medium tracking-tight transition-all duration-300 hover:bg-white focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
           style={{
             backgroundColor: "rgba(250,247,241,0.9)",
             color: CHARCOAL,
@@ -221,35 +213,30 @@ export function HeroSection() {
     </div>
   );
 
-  // ── Pinned overlay (motion): full-bleed video + adaptive frosted panel. ──
-  if (active) {
+  // Shared video element props (ref/poster/events/muted/inline).
+  const videoCommon = {
+    ref: videoRef,
+    poster: POSTER,
+    muted: true,
+    playsInline: true,
+    preload: "auto" as const,
+    "aria-label": MEDIA_ALT,
+    onError: () => setFailed(true),
+  };
+
+  // ── Desktop overlay (≥1024px): full-bleed video + left frosted panel. ──
+  if (active && isLg) {
     return (
-      <div ref={trackRef} className="relative h-[200svh] lg:h-[185vh]">
-        <div
-          ref={stickyRef}
-          className="sticky top-0 h-[100svh] overflow-hidden lg:h-screen"
-        >
+      <div ref={trackRef} className="relative h-[185vh]">
+        <div ref={stickyRef} className="sticky top-0 h-screen overflow-hidden">
           <section className="relative h-full w-full overflow-hidden bg-navy">
             <video
-              ref={videoRef}
+              {...videoCommon}
               src={VIDEO}
-              poster={POSTER}
-              muted
-              playsInline
-              preload="auto"
-              aria-label={MEDIA_ALT}
-              onError={() => setFailed(true)}
-              // cover fills the hero; object-position keeps the combine (right
-              // ~⅔ of the frame) visible as the crop narrows on portrait.
-              className="absolute inset-0 h-full w-full object-cover [object-position:66%_50%] sm:[object-position:60%_50%] lg:[object-position:50%_50%]"
+              className="absolute inset-0 h-full w-full object-cover [object-position:50%_50%]"
             />
-            {/* readability scrim: bottom-heavy on mobile (panel sits low), a
-                soft left wash on desktop; plus a top wash so the nav reads. */}
-            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-navy-950/70 via-navy-950/15 to-navy-950/25 lg:bg-gradient-to-r lg:from-navy-950/25 lg:via-transparent lg:to-transparent" />
-            <div className="pointer-events-none absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-navy-950/50 to-transparent lg:hidden" />
-
-            {/* panel: bottom on mobile/tablet, left-centered on desktop */}
-            <div className="relative z-10 flex h-full items-end px-0 pb-5 pt-20 sm:pb-8 lg:items-center lg:pb-0 lg:pt-20">
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-navy-950/25 via-transparent to-transparent" />
+            <div className="relative z-10 flex h-full items-center pt-20">
               <div className="container-x w-full">{content(true)}</div>
             </div>
           </section>
@@ -258,7 +245,36 @@ export function HeroSection() {
     );
   }
 
-  // ── Stacked fallback (reduced-motion / video failure / SSR / no-JS). ──
+  // ── Phone / tablet: clean pinned video area, warm text section below. ──
+  if (active && !isLg) {
+    return (
+      <>
+        <div ref={trackRef} className="relative h-[180svh] bg-steel-light">
+          <div
+            ref={stickyRef}
+            className="sticky top-0 h-[100svh] overflow-hidden bg-steel-light"
+          >
+            {/* video sits directly below the nav, full width, nothing over it */}
+            <div className="absolute inset-x-0 top-20 overflow-hidden bg-navy">
+              <div className="relative aspect-[3/4] w-full overflow-hidden sm:aspect-[16/10]">
+                <video
+                  {...videoCommon}
+                  src={VIDEO_MOBILE}
+                  className="absolute inset-0 h-full w-full object-cover [object-position:62%_50%] sm:[object-position:55%_50%]"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <section className="bg-steel-light pb-14 pt-8">
+          <div className="container-x">{content(false)}</div>
+        </section>
+      </>
+    );
+  }
+
+  // ── Stacked fallback (reduced-motion / video failure / short / SSR). ──
   return (
     <section className="bg-steel-light pt-20">
       <div className="relative aspect-[4/3] w-full overflow-hidden sm:aspect-[16/9]">
