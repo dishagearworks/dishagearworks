@@ -250,19 +250,20 @@ export function HeroSection() {
     return (
       <>
         <div ref={trackRef} className="relative h-[180svh] bg-steel-light">
+          {/* The sticky fills the viewport and the video fills it below the nav,
+              so there is NO warm gap under the video while it is pinned. The
+              text section that follows provides the clean ~32px transition. */}
           <div
             ref={stickyRef}
-            className="sticky top-0 h-[100svh] overflow-hidden bg-steel-light"
+            className="sticky top-0 flex h-[100svh] flex-col overflow-hidden bg-navy pt-20"
           >
-            {/* video sits directly below the nav, full width, nothing over it */}
-            <div className="absolute inset-x-0 top-20 overflow-hidden bg-navy">
-              <div className="relative aspect-[3/4] w-full overflow-hidden sm:aspect-[16/10]">
-                <video
-                  {...videoCommon}
-                  src={VIDEO_MOBILE}
-                  className="absolute inset-0 h-full w-full object-cover [object-position:62%_50%] sm:[object-position:55%_50%]"
-                />
-              </div>
+            {/* video directly below the nav, full width, nothing over it */}
+            <div className="relative w-full flex-1 overflow-hidden bg-navy">
+              <video
+                {...videoCommon}
+                src={VIDEO_MOBILE}
+                className="absolute inset-0 h-full w-full object-cover [object-position:64%_42%] sm:[object-position:56%_48%]"
+              />
             </div>
           </div>
         </div>
