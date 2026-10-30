@@ -17,6 +17,7 @@ export const metadata: Metadata = {
       "A look inside our factory — machines, workshop and manufacturing in progress at DISHA GEARWORKS, Nabha, Punjab.",
     url: `${siteConfig.url}/gallery`,
     type: "website",
+    images: [siteConfig.ogImage],
   },
 };
 

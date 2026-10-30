@@ -21,6 +21,7 @@ export const metadata: Metadata = {
       "Tell us your requirements and our team will respond with a quotation and lead time. We welcome both domestic and export inquiries.",
     url: `${siteConfig.url}/contact`,
     type: "website",
+    images: [siteConfig.ogImage],
   },
 };
 

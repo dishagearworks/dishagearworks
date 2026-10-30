@@ -80,8 +80,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: `${siteConfig.name} — ${siteConfig.tagline}`,
-    description: siteConfig.description,
+    // title/description intentionally omitted here so each page's own title and
+    // description flow through — Next derives the Twitter title/description from
+    // the page metadata instead of repeating this homepage text everywhere.
     images: [siteConfig.ogImage],
   },
   robots: {
@@ -123,7 +124,7 @@ export default function RootLayout({
         "@type": "Organization",
         "@id": orgId,
         name: siteConfig.name,
-        legalName: siteConfig.name,
+        legalName: siteConfig.legalName,
         description: siteConfig.description,
         foundingDate: String(siteConfig.since),
         email: siteConfig.email,
@@ -147,6 +148,7 @@ export default function RootLayout({
         "@type": "LocalBusiness",
         "@id": `${siteConfig.url}/#localbusiness`,
         name: siteConfig.name,
+        legalName: siteConfig.legalName,
         description: siteConfig.description,
         url: siteConfig.url,
         email: siteConfig.email,

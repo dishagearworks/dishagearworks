@@ -21,6 +21,7 @@ export const metadata: Metadata = {
       "A manufacturing legacy since 1976 — precision agricultural machinery components engineered in Nabha, Punjab and trusted by 400+ repeat customers across India and abroad.",
     url: `${siteConfig.url}/about`,
     type: "website",
+    images: [siteConfig.ogImage],
   },
 };
 

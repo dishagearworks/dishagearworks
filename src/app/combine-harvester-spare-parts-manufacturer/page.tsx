@@ -25,6 +25,7 @@ export const metadata: Metadata = {
       "Combine harvester spare parts and agricultural machinery components manufactured in Nabha, Punjab, India since 1976. OEM, export and bulk enquiries welcome.",
     url: `${siteConfig.url}${PATH}`,
     type: "website",
+    images: [siteConfig.ogImage],
   },
 };
 

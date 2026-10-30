@@ -15,6 +15,7 @@ export const metadata: Metadata = {
     description: article.description,
     url: `${siteConfig.url}/resources/${article.slug}`,
     type: "article",
+    images: [siteConfig.ogImage],
   },
 };
 
@@ -42,26 +43,28 @@ export default function Page() {
         It is the single most important figure, because the sprocket teeth must
         match the chain exactly. Measure across several links and divide to
         reduce error. Many agricultural drives use a{" "}
-        <strong>3/4 inch pitch</strong>, but always confirm against the chain
-        actually fitted to your machine rather than assuming.
+        <strong>5/8 inch or 3/4 inch pitch</strong>, but always confirm against
+        the chain actually fitted to your machine rather than assuming.
       </p>
 
       <h3>2. Number of teeth</h3>
       <p>
         Count every tooth around the sprocket. The tooth count sets the gear
-        ratio and the working diameter, so it must be exact. Combine harvester
-        sprockets commonly fall in the <strong>13 to 70 teeth</strong> range
-        depending on the position in the drive. If the old sprocket is badly
-        worn, count from a matching part on the other side of the machine.
+        ratio and the working diameter, so it must be exact. In the standard
+        pitches, sprockets commonly fall in the <strong>13 to 52 teeth</strong>{" "}
+        range depending on the position in the drive, and custom pitches can be
+        made to requirement. If the old sprocket is badly worn, count from a
+        matching part on the other side of the machine.
       </p>
 
       <h3>3. Bore and keyway</h3>
       <p>
         The bore is the centre hole that fits the shaft; the keyway is the slot
         that locks the sprocket to the shaft so it cannot spin. Measure the
-        shaft diameter and the key width. Bore options include plain bore,
-        keyway, splined, taper bore and fully custom bores. Getting this wrong is
-        the usual cause of a sprocket that "fits but slips."
+        shaft diameter and the key width. Bore options include a pilot bore,
+        finished bores of 25, 30, 35, 40 or 45 mm, or a fully custom bore
+        machined to your drawing. Getting this wrong is the usual cause of a
+        sprocket that "fits but slips."
       </p>
 
       <h3>4. Hub style and overall width</h3>
@@ -93,9 +96,10 @@ export default function Page() {
       </ul>
       <p>
         With these in hand, a manufacturer can quote quickly and machine to your
-        requirement. DISHA GEARWORKS produces simplex sprockets in EN8 and mild
-        steel, with tempered teeth and custom bores as needed, for combine
-        harvesters and agricultural machinery.
+        requirement. DISHA GEARWORKS produces simplex sprockets in EN8, in
+        standard 5/8 inch and 3/4 inch pitches (13–52 teeth) with custom pitches
+        and bores to requirement, for combine harvesters and agricultural
+        machinery.
       </p>
       <p>
         Have the details ready?{" "}

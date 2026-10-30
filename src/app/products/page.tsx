@@ -20,6 +20,7 @@ export const metadata: Metadata = {
       "A complete range of precision spare parts and assemblies for combine harvesters and agricultural machinery — manufactured in Nabha, Punjab since 1976.",
     url: `${siteConfig.url}/products`,
     type: "website",
+    images: [siteConfig.ogImage],
   },
 };
 

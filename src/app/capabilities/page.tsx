@@ -25,6 +25,7 @@ export const metadata: Metadata = {
       "Modern CNC and VMC machining and end-to-end manufacturing services for agricultural machinery components — all under one roof in Nabha, Punjab.",
     url: `${siteConfig.url}/capabilities`,
     type: "website",
+    images: [siteConfig.ogImage],
   },
 };
 

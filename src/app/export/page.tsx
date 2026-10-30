@@ -21,6 +21,7 @@ export const metadata: Metadata = {
       "Agricultural machinery components manufactured in Nabha, Punjab, India — export enquiries welcome. Sample/drawing-based manufacturing for OEMs, dealers and importers.",
     url: `${siteConfig.url}/export`,
     type: "website",
+    images: [siteConfig.ogImage],
   },
 };
 

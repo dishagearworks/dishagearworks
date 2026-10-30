@@ -19,6 +19,7 @@ export const metadata: Metadata = {
       "Practical guides on sourcing and specifying agricultural machinery components for dealers, OEMs and export buyers.",
     url: `${siteConfig.url}/resources`,
     type: "website",
+    images: [siteConfig.ogImage],
   },
 };
 

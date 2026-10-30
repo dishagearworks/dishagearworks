@@ -17,6 +17,10 @@
 
 export const siteConfig = {
   name: "DISHA GEARWORKS",
+  // Registered firm (legal entity) behind the DISHA GEARWORKS brand. Used only
+  // for `legalName` in structured data — DISHA GEARWORKS stays the
+  // customer-facing brand everywhere visible.
+  legalName: "Sandeep Industries",
   tagline: "Precision Agricultural Machinery Components",
   experienceNote: "Nearly 50 Years of Engineering Excellence",
   footerTagline:
@@ -78,7 +82,7 @@ export const siteConfig = {
   // Approx. geo-coordinates of the works (Nabha, Punjab) for LocalBusiness schema.
   geo: { latitude: 30.3746, longitude: 76.1419 },
   description:
-    "Established in 1976, DISHA GEARWORKS is a trusted manufacturer of precision-engineered components for combine harvesters and agricultural machinery — sprockets, pulleys, bearing housings, gears, shafts, hubs, flanges, bushes, sleeves and custom CNC components. 400+ repeat customers across India and abroad.",
+    "Agricultural machinery spare parts manufacturer since 1976 — sprockets, pulleys, gears, shafts, bearing housings and custom CNC components. 400+ repeat clients.",
   keywords: [
     "agricultural machinery spare parts",
     "combine harvester components",

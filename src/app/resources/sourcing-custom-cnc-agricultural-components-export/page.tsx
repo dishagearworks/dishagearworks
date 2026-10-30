@@ -15,6 +15,7 @@ export const metadata: Metadata = {
     description: article.description,
     url: `${siteConfig.url}/resources/${article.slug}`,
     type: "article",
+    images: [siteConfig.ogImage],
   },
 };
 

@@ -24,6 +24,7 @@ export const metadata: Metadata = {
       "4 speed, 5 speed GDR and reduction body assemblies for combine harvesters, manufactured in Nabha, Punjab, India. OEM, export and bulk enquiries welcome.",
     url: `${siteConfig.url}${PATH}`,
     type: "website",
+    images: [siteConfig.ogImage],
   },
 };
 

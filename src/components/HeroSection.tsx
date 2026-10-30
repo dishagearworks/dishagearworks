@@ -7,8 +7,8 @@ import { siteConfig } from "@/config/site";
 import { GearIcon, ShieldIcon, ClockIcon, UsersIcon, ArrowRightIcon } from "./icons";
 
 const POSTER = "/videos/combine-harvest-poster.jpg";
-const VIDEO = "/videos/combine-harvest.mp4"; // 1280x720 — desktop
-const VIDEO_MOBILE = "/videos/combine-harvest-mobile.mp4"; // 960x540, lighter — phones/tablets
+const VIDEO = "/videos/combine-harvest.mp4"; // 1920x1080 — desktop
+const VIDEO_MOBILE = "/videos/combine-harvest-mobile.mp4"; // 1280x720, lighter — phones/tablets
 const MEDIA_ALT = "Aerial view of a combine harvester harvesting a wheat field";
 
 // Exact palette from the brief.
@@ -46,6 +46,8 @@ export function HeroSection() {
   const [isLg, setIsLg] = useState(false); // desktop-overlay vs mobile-banner layout
   const [short, setShort] = useState(false); // viewport too short to pin cleanly
   const [failed, setFailed] = useState(false);
+  const [videoReady, setVideoReady] = useState(false); // first frame decoded
+  const [scrolled, setScrolled] = useState(false); // user has scrolled at least once
   const trackRef = useRef<HTMLDivElement>(null);
   const stickyRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -121,10 +123,15 @@ export function HeroSection() {
       { rootMargin: "200px" }
     );
     io.observe(track);
+    // Reveal the video (fade the poster) on the first scroll — which is also
+    // when scrubbing starts — so the poster stays the LCP until then.
+    const onFirstScroll = () => setScrolled(true);
+    window.addEventListener("scroll", onFirstScroll, { once: true, passive: true });
     return () => {
       running = false;
       cancelAnimationFrame(raf);
       io.disconnect();
+      window.removeEventListener("scroll", onFirstScroll);
     };
   }, [active, isLg]);
 
@@ -213,16 +220,40 @@ export function HeroSection() {
     </div>
   );
 
-  // Shared video element props (ref/poster/events/muted/inline).
+  // Shared video element props (ref/events/muted/inline).
   const videoCommon = {
     ref: videoRef,
-    poster: POSTER,
+    // No raw `poster` attribute: an optimized next/image poster is layered
+    // behind each <video> instead, so the heavy raw JPG is never fetched and
+    // the poster loads once (as WebP) rather than twice.
     muted: true,
     playsInline: true,
-    preload: "auto" as const,
+    // `metadata` (not `auto`) keeps the multi-MB clip from blocking the LCP;
+    // the effect's play() prime kicks off the real load right after first paint.
+    preload: "metadata" as const,
     "aria-label": MEDIA_ALT,
+    onLoadedData: () => setVideoReady(true),
     onError: () => setFailed(true),
   };
+
+  // Optimized poster (WebP via next/image) layered ON TOP of the <video>. It is
+  // the LCP element — small and preloaded — and the poster IS video-frame-0, so
+  // at rest it is identical to the video. It only fades out on the first scroll
+  // (which is also when scrubbing starts), so with no interaction the small
+  // poster — not the heavy video — stays the LCP. `alt=""` because it is
+  // decorative; the <video> carries the aria-label.
+  const posterLayer = (objectPosition: string) => (
+    <Image
+      src={POSTER}
+      alt=""
+      fill
+      priority
+      sizes="100vw"
+      className={`pointer-events-none object-cover ${objectPosition} transition-opacity duration-500 ${
+        scrolled && videoReady ? "opacity-0" : "opacity-100"
+      }`}
+    />
+  );
 
   // ── Desktop overlay (≥1024px): full-bleed video + left frosted panel. ──
   if (active && isLg) {
@@ -235,6 +266,7 @@ export function HeroSection() {
               src={VIDEO}
               className="absolute inset-0 h-full w-full object-cover [object-position:50%_50%]"
             />
+            {posterLayer("[object-position:50%_50%]")}
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-navy-950/25 via-transparent to-transparent" />
             <div className="relative z-10 flex h-full items-center pt-20">
               <div className="container-x w-full">{content(true)}</div>
@@ -264,6 +296,7 @@ export function HeroSection() {
                 src={VIDEO_MOBILE}
                 className="absolute inset-0 h-full w-full object-cover [object-position:64%_42%] sm:[object-position:56%_48%]"
               />
+              {posterLayer("[object-position:64%_42%] sm:[object-position:56%_48%]")}
             </div>
           </div>
         </div>

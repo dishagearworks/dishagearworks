@@ -22,6 +22,7 @@ export const metadata: Metadata = {
       "Reliable OEM and contract manufacturing partner for agricultural machinery components in Nabha, Punjab, India — made to your drawing, sample or design.",
     url: `${siteConfig.url}${PATH}`,
     type: "website",
+    images: [siteConfig.ogImage],
   },
 };
 

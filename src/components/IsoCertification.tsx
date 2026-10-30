@@ -67,17 +67,17 @@ export function IsoCertification() {
               combine harvesters.
             </p>
 
-            <dl className="mt-6 grid gap-x-8 gap-y-3 sm:grid-cols-2">
+            <div className="mt-6 grid gap-x-8 gap-y-3 sm:grid-cols-2">
               {facts.map((f) => (
                 <div key={f.label} className="flex items-start gap-2.5">
                   <CheckIcon className="mt-0.5 h-4 w-4 shrink-0 text-orange" />
                   <div>
-                    <dt className="label-mono text-steel/70">{f.label}</dt>
-                    <dd className="text-sm font-medium text-white">{f.value}</dd>
+                    <p className="label-mono text-steel/70">{f.label}</p>
+                    <p className="text-sm font-medium text-white">{f.value}</p>
                   </div>
                 </div>
               ))}
-            </dl>
+            </div>
 
             <div className="mt-7">
               <a
