@@ -6,6 +6,8 @@ import { SectionHeading } from "@/components/SectionHeading";
 import { MaterialsSection } from "@/components/MaterialsSection";
 import { IsoCertification } from "@/components/IsoCertification";
 import { CTASection } from "@/components/CTASection";
+import { QuoteButton } from "@/components/QuoteButton";
+import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { SmartImage } from "@/components/PlaceholderImage";
 import { FadeIn, StaggerContainer, StaggerItem } from "@/components/motion/FadeIn";
 import { CheckIcon } from "@/components/icons";
@@ -15,9 +17,9 @@ import { JsonLd } from "@/components/JsonLd";
 import { pageGraph } from "@/lib/schema";
 
 export const metadata: Metadata = {
-  title: "Manufacturing Capabilities — CNC Turning, VMC Milling & OEM",
+  title: "Manufacturing Capabilities — CNC Machining, Welding, Assembly & Casting",
   description:
-    "CNC turning, CNC milling, precision machining, custom components, OEM and contract manufacturing, batch production and agricultural machinery spare parts manufacturing.",
+    "CNC and conventional turning, milling, drilling, tapping, keyway, broaching, balancing, MIG/ARC welding, gearbox assembly and in-house casting for agricultural machinery components — made to your drawing or sample.",
   alternates: { canonical: "/capabilities" },
   openGraph: {
     title: "Manufacturing Capabilities | DISHA GEARWORKS",
@@ -28,6 +30,9 @@ export const metadata: Metadata = {
     images: [siteConfig.ogImage],
   },
 };
+
+const capabilitiesMessage =
+  "Hello DISHA GEARWORKS, I would like a quotation for machined / custom components. I can send a drawing, sample or photo with material and quantity details.";
 
 const process = [
   { step: "01", title: "Inquiry & Design", text: "We review your drawings, samples or requirements and confirm specifications." },
@@ -109,7 +114,7 @@ export default function CapabilitiesPage() {
                 "Material selection guidance",
                 "Reverse engineering",
                 "Small to large batches",
-                "On-time delivery",
+                "Gearbox & reduction assembly",
               ].map((f) => (
                 <li key={f} className="flex items-start gap-2 text-sm text-navy">
                   <CheckIcon className="mt-0.5 h-4 w-4 shrink-0 text-orange" />
@@ -117,6 +122,11 @@ export default function CapabilitiesPage() {
                 </li>
               ))}
             </ul>
+            <p className="mt-6 text-sm leading-relaxed text-slate-500">
+              Heat treatment such as hardening or carburizing is arranged through
+              trusted external specialists — it is not carried out in-house, so it
+              is sourced only where a part needs it.
+            </p>
           </FadeIn>
         </div>
       </section>
@@ -162,6 +172,55 @@ export default function CapabilitiesPage() {
             </Link>{" "}
             for replacement and export requirements.
           </p>
+        </div>
+      </section>
+
+      {/* What to send for a quotation + enquiry options */}
+      <section className="bg-white py-16 sm:py-20" aria-labelledby="quote-heading">
+        <div className="container-x grid items-start gap-12 lg:grid-cols-2">
+          <FadeIn direction="right">
+            <span className="mb-3 inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.2em] text-orange">
+              <span className="h-px w-6 bg-orange" /> Request a Quotation
+            </span>
+            <h2
+              id="quote-heading"
+              className="font-heading text-3xl font-bold leading-tight text-navy sm:text-4xl"
+            >
+              What to send for a quotation
+            </h2>
+            <p className="mt-5 text-base leading-relaxed text-slate-600">
+              The more detail you share, the faster and more accurate the
+              quotation. You do not need a full drawing — a sample or clear photo
+              is enough to get started, and we can reverse-engineer worn or
+              discontinued parts.
+            </p>
+            <div className="mt-8 flex flex-wrap gap-4">
+              <QuoteButton href="/contact" size="lg">
+                Request a Quote
+              </QuoteButton>
+              <WhatsAppButton size="lg" message={capabilitiesMessage}>
+                Send on WhatsApp
+              </WhatsAppButton>
+            </div>
+          </FadeIn>
+
+          <FadeIn direction="left">
+            <ul className="grid gap-3 rounded-2xl border border-navy/10 bg-steel-light/50 p-6 sm:p-8">
+              {[
+                "A drawing, CAD file, sample or clear photo of the part",
+                "Material — or ask us to suggest a suitable one",
+                "Quantity — prototype, trial batch or regular bulk",
+                "Key dimensions and any critical fits or tolerances",
+                "The machine or application the part is used in",
+                "Any finish or heat-treatment requirement",
+              ].map((h) => (
+                <li key={h} className="flex items-start gap-2.5 text-sm text-navy">
+                  <CheckIcon className="mt-0.5 h-4 w-4 shrink-0 text-orange" />
+                  {h}
+                </li>
+              ))}
+            </ul>
+          </FadeIn>
         </div>
       </section>
 

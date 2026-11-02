@@ -59,7 +59,7 @@ const details: { title: string; text: string }[] = [
 const process = [
   { step: "01", title: "Enquiry", text: "Share your component, sample, drawing or photo with quantity and application details." },
   { step: "02", title: "Quotation", text: "We review the requirement and respond with a quotation and lead time." },
-  { step: "03", title: "Production & inspection", text: "Parts are manufactured and inspected before dispatch; assemblies are tested." },
+  { step: "03", title: "Production & inspection", text: "Parts are manufactured and inspected before dispatch." },
   { step: "04", title: "Packing & dispatch", text: "Export-suitable packing and dispatch as per the agreed terms." },
 ];
 
@@ -122,13 +122,18 @@ export default function ExportPage() {
               <p>
                 We currently supply customers across India and warmly welcome export
                 enquiries, with a particular focus on European OEMs, dealers and
-                importers. Every component can be manufactured as per sample, technical
-                drawing or custom requirement.
+                importers. For export, universal components such as sprockets, pulleys,
+                hubs, bushes, shafts and custom CNC parts travel best, while our 4- and
+                5-speed GDR gearbox and reduction assemblies are built for Indian
+                combine harvesters. Every component can be manufactured as per sample,
+                technical drawing or custom requirement.
               </p>
               <p>
-                International buyers can send a sample, drawing or photo for review. We
-                will respond with a quotation, materials and lead time so you can plan
-                your sourcing with confidence.
+                To quote accurately, international buyers can send a sample, technical
+                drawing, CAD file or clear photo, along with the material, quantity, key
+                dimensions and the application. We will respond with a quotation,
+                suitable materials and a lead time so you can plan your sourcing with
+                confidence.
               </p>
               <p>
                 Read more about our work as a{" "}
@@ -164,8 +169,8 @@ export default function ExportPage() {
                 "Manufacturer since 1976, 400+ repeat customers",
                 "Sample, drawing and custom-size manufacturing",
                 "Reverse engineering of old / discontinued parts",
-                "In-house CNC turning, VMC milling and grinding",
-                "Inspected before dispatch; assemblies tested",
+                "In-house machining, MIG/ARC welding, assembly and casting",
+                "Inspected before dispatch",
                 "Export enquiries welcome — Europe and beyond",
               ].map((h) => (
                 <li key={h} className="flex items-start gap-2.5 text-sm text-navy">
