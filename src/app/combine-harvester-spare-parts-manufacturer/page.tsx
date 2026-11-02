@@ -30,7 +30,7 @@ export const metadata: Metadata = {
 };
 
 const eyebrow =
-  "mb-3 inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.2em] text-orange";
+  "mb-3 inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.2em] text-orange-600";
 const h2 = "font-heading text-2xl font-bold leading-tight text-navy sm:text-3xl";
 
 // Product names → real product routes (verified to exist). Items without a
@@ -300,7 +300,7 @@ export default function Page() {
           </StaggerContainer>
           <p className="mt-6 text-sm text-slate-500">
             Browse every component on our{" "}
-            <Link href="/products" className="font-medium text-orange hover:text-orange-300">
+            <Link href="/products" className="font-medium text-orange-600 hover:text-orange-700">
               products page
             </Link>
             .
@@ -388,7 +388,7 @@ export default function Page() {
           </ul>
           <p className="mt-6 text-sm text-slate-500">
             See the full breakdown on our{" "}
-            <Link href="/capabilities" className="font-medium text-orange hover:text-orange-300">
+            <Link href="/capabilities" className="font-medium text-orange-600 hover:text-orange-700">
               manufacturing capabilities page
             </Link>
             .
@@ -470,7 +470,7 @@ export default function Page() {
             international buyers, OEMs, dealers and importers. Quantities are
             agreed as per order requirement, from trial batches to regular bulk
             supply. Learn more on our{" "}
-            <Link href="/export" className="font-medium text-orange hover:text-orange-300">
+            <Link href="/export" className="font-medium text-orange-600 hover:text-orange-700">
               export information page
             </Link>
             .
@@ -535,9 +535,11 @@ export default function Page() {
                 key={step}
                 className="relative h-full rounded-2xl border border-navy/10 bg-steel-light/40 p-6"
               >
-                <span className="font-heading text-3xl font-bold text-orange/25">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
+                <span
+                  aria-hidden
+                  data-step={String(i + 1).padStart(2, "0")}
+                  className="step-watermark font-heading text-3xl font-bold text-orange/25"
+                />
                 <p className="mt-2 text-sm leading-relaxed text-navy">{step}</p>
               </li>
             ))}

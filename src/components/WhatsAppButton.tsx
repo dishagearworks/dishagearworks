@@ -15,9 +15,9 @@ const sizeClass: Record<Size, string> = {
 // site's own theme palette (used only on these click-to-chat buttons).
 const variantClass: Record<Variant, string> = {
   solid:
-    "bg-[#25D366] text-white shadow-card ring-1 ring-inset ring-black/5 hover:bg-[#1eb858]",
+    "bg-[#0C7C43] text-white shadow-card ring-1 ring-inset ring-black/5 hover:bg-[#0A6838]",
   outline:
-    "border border-[#25D366] text-[#0f7a37] hover:bg-[#25D366]/10",
+    "border border-[#0C7C43] text-[#0f7a37] hover:bg-[#0C7C43]/10",
 };
 
 type WhatsAppButtonProps = {
@@ -51,7 +51,7 @@ export function WhatsAppButton({
       target="_blank"
       rel="noopener noreferrer"
       aria-label={typeof children === "string" ? children : "Send on WhatsApp"}
-      className={`group inline-flex items-center justify-center gap-2 rounded-md font-heading font-medium tracking-tight transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#25D366] focus-visible:ring-offset-2 ${variantClass[variant]} ${sizeClass[size]} ${fullWidth ? "w-full" : ""} ${className}`}
+      className={`group inline-flex items-center justify-center gap-2 rounded-md font-heading font-medium tracking-tight transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0C7C43] focus-visible:ring-offset-2 ${variantClass[variant]} ${sizeClass[size]} ${fullWidth ? "w-full" : ""} ${className}`}
     >
       <WhatsAppIcon className="h-[18px] w-[18px] shrink-0" />
       <span>{children}</span>

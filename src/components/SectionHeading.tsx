@@ -25,8 +25,16 @@ export function SectionHeading({
   return (
     <FadeIn className={`flex max-w-2xl flex-col ${alignment}`}>
       {eyebrow && (
-        <span className="label-mono mb-4 inline-flex items-center gap-2.5 text-orange">
-          {index && <span className="text-orange/60">{index}</span>}
+        <span
+          className={`label-mono mb-4 inline-flex items-center gap-2.5 ${
+            light ? "text-orange" : "text-orange-600"
+          }`}
+        >
+          {index && (
+            <span className={light ? "text-orange/60" : "text-orange-600/80"}>
+              {index}
+            </span>
+          )}
           <span className="h-px w-7 bg-orange/70" />
           {eyebrow}
         </span>

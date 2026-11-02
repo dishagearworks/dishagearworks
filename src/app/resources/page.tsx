@@ -72,7 +72,7 @@ export default function ResourcesPage() {
                   href={`/resources/${a.slug}`}
                   className="group flex h-full flex-col rounded-lg border border-navy/10 bg-white p-6 shadow-card transition-all duration-300 hover:-translate-y-1 hover:border-orange/40 hover:shadow-cardHover"
                 >
-                  <span className="label-mono text-orange">
+                  <span className="label-mono text-orange-600">
                     {a.readMins} min read
                   </span>
                   <h3 className="mt-3 font-heading text-lg font-semibold leading-snug text-navy transition-colors group-hover:text-orange">
@@ -81,7 +81,7 @@ export default function ResourcesPage() {
                   <p className="mt-3 flex-1 text-sm leading-relaxed text-slate-600">
                     {a.excerpt}
                   </p>
-                  <span className="mt-5 inline-flex items-center gap-2 font-heading text-sm font-semibold text-orange">
+                  <span className="mt-5 inline-flex items-center gap-2 font-heading text-sm font-semibold text-orange-600">
                     Read article
                     <ArrowRightIcon className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
                   </span>

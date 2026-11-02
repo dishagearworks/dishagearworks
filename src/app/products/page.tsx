@@ -55,7 +55,7 @@ export default function ProductsPage() {
             As a{" "}
             <Link
               href="/combine-harvester-spare-parts-manufacturer"
-              className="font-medium text-orange transition-colors hover:text-orange-300"
+              className="font-medium text-orange-600 transition-colors hover:text-orange-700"
             >
               combine harvester spare parts manufacturer
             </Link>{" "}
@@ -111,7 +111,7 @@ export default function ProductsPage() {
                 <p className="mt-2 flex-1 text-sm leading-relaxed text-slate-600">
                   {c.text}
                 </p>
-                <span className="mt-4 inline-flex items-center gap-2 font-heading text-sm font-semibold text-orange">
+                <span className="mt-4 inline-flex items-center gap-2 font-heading text-sm font-semibold text-orange-600">
                   Learn more →
                 </span>
               </Link>

@@ -176,7 +176,7 @@ export function Footer() {
           <p>
             © {year} {siteConfig.name}. All rights reserved.
           </p>
-          <p className="text-steel/70">
+          <p className="text-steel">
             {siteConfig.industry} · {siteConfig.address.line2}
           </p>
         </div>

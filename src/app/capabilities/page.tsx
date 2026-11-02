@@ -96,7 +96,7 @@ export default function CapabilitiesPage() {
             </div>
           </FadeIn>
           <FadeIn direction="right" className="order-1 lg:order-2">
-            <span className="mb-3 inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.2em] text-orange">
+            <span className="mb-3 inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.2em] text-orange-600">
               <span className="h-px w-6 bg-orange" /> Precision Engineering
             </span>
             <h2 className="font-heading text-3xl font-bold leading-tight text-navy sm:text-4xl">
@@ -138,13 +138,11 @@ export default function CapabilitiesPage() {
             eyebrow="How We Work"
             title="A clear, dependable manufacturing process"
           />
-          <StaggerContainer className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <ol className="reveal-stagger mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {process.map((p) => (
-              <StaggerItem key={p.step}>
+              <li key={p.step}>
                 <div className="relative h-full rounded-2xl border border-slate-200 bg-white p-7 shadow-card">
-                  <span className="font-heading text-4xl font-bold text-orange/20">
-                    {p.step}
-                  </span>
+                  <span aria-hidden data-step={p.step} className="step-watermark font-heading text-4xl font-bold text-orange/20" />
                   <h3 className="mt-2 font-heading text-lg font-semibold text-navy">
                     {p.title}
                   </h3>
@@ -152,21 +150,21 @@ export default function CapabilitiesPage() {
                     {p.text}
                   </p>
                 </div>
-              </StaggerItem>
+              </li>
             ))}
-          </StaggerContainer>
-          <p className="mt-10 text-sm text-slate-500">
+          </ol>
+          <p className="mt-10 text-sm text-slate-600">
             These capabilities power our work as a{" "}
             <Link
               href="/combine-harvester-spare-parts-manufacturer"
-              className="font-medium text-orange transition-colors hover:text-orange-300"
+              className="font-medium text-orange-600 transition-colors hover:text-orange-700"
             >
               combine harvester spare parts manufacturer
             </Link>{" "}
             and support{" "}
             <Link
               href="/oem-contract-manufacturing"
-              className="font-medium text-orange transition-colors hover:text-orange-300"
+              className="font-medium text-orange-600 transition-colors hover:text-orange-700"
             >
               OEM &amp; contract manufacturing
             </Link>{" "}
@@ -179,7 +177,7 @@ export default function CapabilitiesPage() {
       <section className="bg-white py-16 sm:py-20" aria-labelledby="quote-heading">
         <div className="container-x grid items-start gap-12 lg:grid-cols-2">
           <FadeIn direction="right">
-            <span className="mb-3 inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.2em] text-orange">
+            <span className="mb-3 inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.2em] text-orange-600">
               <span className="h-px w-6 bg-orange" /> Request a Quotation
             </span>
             <h2

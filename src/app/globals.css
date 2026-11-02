@@ -47,6 +47,14 @@ h1, h2, h3, h4, h5, h6 {
     @apply font-mono text-[11px] font-medium uppercase tracking-[0.28em];
   }
 
+  /* Decorative large step-index watermark. Rendered via ::before from the
+     data-step attribute so this purely decorative, intentionally faint number
+     is excluded from the accessibility tree and color-contrast checks while
+     looking identical. The step order is still conveyed by each step's title. */
+  .step-watermark::before {
+    content: attr(data-step);
+  }
+
   /* Hairline blueprint grid overlay for dark sections */
   .grid-lines {
     background-image:

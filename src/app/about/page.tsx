@@ -78,7 +78,7 @@ export default function AboutPage() {
       <section className="bg-white py-20">
         <div className="container-x grid items-start gap-12 lg:grid-cols-2">
           <FadeIn direction="right">
-            <span className="mb-3 inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.2em] text-orange">
+            <span className="mb-3 inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.2em] text-orange-600">
               <span className="h-px w-6 bg-orange" /> Who We Are
             </span>
             <h2 className="font-heading text-3xl font-bold leading-tight text-navy sm:text-4xl">

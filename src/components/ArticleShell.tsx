@@ -17,7 +17,7 @@ const prose =
   "[&>h3]:mt-7 [&>h3]:font-heading [&>h3]:text-lg [&>h3]:font-semibold [&>h3]:text-navy " +
   "[&>ul]:mt-4 [&>ul]:list-disc [&>ul]:space-y-2 [&>ul]:pl-5 [&>ul>li]:marker:text-orange " +
   "[&>ol]:mt-4 [&>ol]:list-decimal [&>ol]:space-y-2 [&>ol]:pl-5 [&>ol>li]:marker:text-orange " +
-  "[&_a]:font-medium [&_a]:text-orange [&_a]:underline [&_a]:decoration-orange/30 [&_a]:underline-offset-2 hover:[&_a]:text-orange-300 " +
+  "[&_a]:font-medium [&_a]:text-orange-600 [&_a]:underline [&_a]:decoration-orange/40 [&_a]:underline-offset-2 hover:[&_a]:text-orange-700 " +
   "[&>p>strong]:text-navy";
 
 export function ArticleShell({

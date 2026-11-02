@@ -28,7 +28,7 @@ export function WhatsAppFloat() {
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Chat on WhatsApp — send drawing or product photo"
-          className="flex h-12 w-12 items-center justify-center rounded-full bg-[#25D366] text-white shadow-[0_8px_24px_-6px_rgba(0,0,0,0.45)] ring-1 ring-black/10"
+          className="flex h-12 w-12 items-center justify-center rounded-full bg-[#0C7C43] text-white shadow-[0_8px_24px_-6px_rgba(0,0,0,0.45)] ring-1 ring-black/10"
         >
           <WhatsAppIcon className="h-6 w-6" />
         </a>
@@ -40,7 +40,7 @@ export function WhatsAppFloat() {
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Send Drawing / Product Photo on WhatsApp"
-        className="group fixed bottom-6 right-6 z-50 hidden max-w-[calc(100vw-2rem)] items-center gap-2.5 rounded-full bg-[#25D366] py-3 pl-3.5 pr-4 text-white shadow-[0_8px_24px_-6px_rgba(0,0,0,0.45)] ring-1 ring-black/10 transition-transform duration-300 hover:-translate-y-0.5 hover:bg-[#1eb858] focus:outline-none focus-visible:ring-2 focus-visible:ring-white sm:flex"
+        className="group fixed bottom-6 right-6 z-50 hidden max-w-[calc(100vw-2rem)] items-center gap-2.5 rounded-full bg-[#0C7C43] py-3 pl-3.5 pr-4 text-white shadow-[0_8px_24px_-6px_rgba(0,0,0,0.45)] ring-1 ring-black/10 transition-transform duration-300 hover:-translate-y-0.5 hover:bg-[#0A6838] focus:outline-none focus-visible:ring-2 focus-visible:ring-white sm:flex"
       >
         <WhatsAppIcon className="h-6 w-6 shrink-0" />
         <span className="whitespace-nowrap font-heading text-sm font-semibold tracking-tight">

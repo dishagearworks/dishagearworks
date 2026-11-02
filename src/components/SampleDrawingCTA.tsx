@@ -26,7 +26,7 @@ export function SampleDrawingCTA({
     <section className="bg-steel-light py-16 sm:py-20">
       <div className="container-x">
         <FadeIn className="mx-auto max-w-3xl rounded-2xl border border-navy/10 bg-white p-8 text-center shadow-card sm:p-12">
-          <span className="label-mono text-orange">Custom Manufacturing</span>
+          <span className="label-mono text-orange-600">Custom Manufacturing</span>
           <h2 className="mt-4 font-heading text-2xl font-bold leading-tight text-navy sm:text-3xl">
             Have a Sample, Drawing or Product Photo?
           </h2>

@@ -96,7 +96,7 @@ export function InquiryForm() {
               quotation and lead time. You can also reach us directly at{" "}
               <a
                 href={`mailto:${siteConfig.email}`}
-                className="font-semibold text-orange"
+                className="font-semibold text-orange-600"
               >
                 {siteConfig.email}
               </a>
@@ -105,7 +105,7 @@ export function InquiryForm() {
             <button
               type="button"
               onClick={() => setStatus("idle")}
-              className="mt-6 text-sm font-semibold text-orange hover:underline"
+              className="mt-6 text-sm font-semibold text-orange-600 hover:underline"
             >
               Send another inquiry
             </button>
@@ -128,7 +128,7 @@ export function InquiryForm() {
 
         <div>
           <label htmlFor="name" className={labelClass}>
-            Name <span className="text-orange">*</span>
+            Name <span className="text-orange-600">*</span>
           </label>
           <input id="name" name="name" required className={inputClass} placeholder="Your full name" />
         </div>
@@ -142,7 +142,7 @@ export function InquiryForm() {
 
         <div>
           <label htmlFor="phone" className={labelClass}>
-            Phone Number <span className="text-orange">*</span>
+            Phone Number <span className="text-orange-600">*</span>
           </label>
           <input
             id="phone"
@@ -156,7 +156,7 @@ export function InquiryForm() {
 
         <div>
           <label htmlFor="email" className={labelClass}>
-            Email <span className="text-orange">*</span>
+            Email <span className="text-orange-600">*</span>
           </label>
           <input
             id="email"

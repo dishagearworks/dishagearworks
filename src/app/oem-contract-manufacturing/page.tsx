@@ -27,7 +27,7 @@ export const metadata: Metadata = {
 };
 
 const eyebrow =
-  "mb-3 inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.2em] text-orange";
+  "mb-3 inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.2em] text-orange-600";
 const h2 = "font-heading text-2xl font-bold leading-tight text-navy sm:text-3xl";
 
 const process = [
@@ -182,13 +182,11 @@ export default function Page() {
             title="A clear contract-manufacturing process"
             subtitle="From drawing to dispatch, every step is confirmed in writing."
           />
-          <StaggerContainer className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <ol className="reveal-stagger mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {process.map((p) => (
-              <StaggerItem key={p.step}>
+              <li key={p.step}>
                 <div className="relative h-full rounded-2xl border border-slate-200 bg-steel-light/40 p-7">
-                  <span className="font-heading text-4xl font-bold text-orange/20">
-                    {p.step}
-                  </span>
+                  <span aria-hidden data-step={p.step} className="step-watermark font-heading text-4xl font-bold text-orange/20" />
                   <h3 className="mt-2 font-heading text-lg font-semibold text-navy">
                     {p.title}
                   </h3>
@@ -196,20 +194,20 @@ export default function Page() {
                     {p.text}
                   </p>
                 </div>
-              </StaggerItem>
+              </li>
             ))}
-          </StaggerContainer>
+          </ol>
           <p className="mt-8 text-sm text-slate-500">
             See our full{" "}
-            <Link href="/capabilities" className="font-medium text-orange hover:text-orange-300">
+            <Link href="/capabilities" className="font-medium text-orange-600 hover:text-orange-700">
               manufacturing capabilities
             </Link>
             , explore{" "}
-            <Link href="/products/custom-cnc-components" className="font-medium text-orange hover:text-orange-300">
+            <Link href="/products/custom-cnc-components" className="font-medium text-orange-600 hover:text-orange-700">
               custom CNC components
             </Link>
             , or read about{" "}
-            <Link href="/export" className="font-medium text-orange hover:text-orange-300">
+            <Link href="/export" className="font-medium text-orange-600 hover:text-orange-700">
               export enquiries
             </Link>
             .

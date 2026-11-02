@@ -101,7 +101,7 @@ export default function ContactPage() {
                       <I className="h-6 w-6" />
                     </span>
                     <div>
-                      <p className="label-mono text-orange">
+                      <p className="label-mono text-orange-600">
                         {label}
                       </p>
                       {href ? (
@@ -126,7 +126,7 @@ export default function ContactPage() {
                   <Icon name="tractor" className="h-6 w-6" />
                 </span>
                 <div>
-                  <p className="label-mono text-orange">
+                  <p className="label-mono text-orange-600">
                     Business Type
                   </p>
                   <p className="font-heading text-base font-medium text-navy">

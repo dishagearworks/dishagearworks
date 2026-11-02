@@ -29,7 +29,7 @@ export const metadata: Metadata = {
 };
 
 const eyebrow =
-  "mb-3 inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.2em] text-orange";
+  "mb-3 inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.2em] text-orange-600";
 const h2 = "font-heading text-2xl font-bold leading-tight text-navy sm:text-3xl";
 
 const assemblySlugs = [
@@ -216,13 +216,13 @@ export default function Page() {
             application details for an accurate quotation. We support OEM,
             replacement and bulk requirements, and can manufacture older or
             discontinued assemblies through reverse engineering. See our{" "}
-            <Link href="/capabilities" className="font-medium text-orange hover:text-orange-300">
+            <Link href="/capabilities" className="font-medium text-orange-600 hover:text-orange-700">
               manufacturing capabilities
             </Link>{" "}
             or read about us as a{" "}
             <Link
               href="/combine-harvester-spare-parts-manufacturer"
-              className="font-medium text-orange hover:text-orange-300"
+              className="font-medium text-orange-600 hover:text-orange-700"
             >
               combine harvester spare parts manufacturer
             </Link>

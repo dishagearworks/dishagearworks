@@ -58,14 +58,14 @@ export default function HomePage() {
               Sourcing in volume? See why we&apos;re a trusted{" "}
               <Link
                 href="/combine-harvester-spare-parts-manufacturer"
-                className="font-medium text-orange transition-colors hover:text-orange-300"
+                className="font-medium text-orange-600 transition-colors hover:text-orange-700"
               >
                 combine harvester spare parts manufacturer
               </Link>{" "}
               and{" "}
               <Link
                 href="/combine-harvester-gearbox-assembly-manufacturer"
-                className="font-medium text-orange transition-colors hover:text-orange-300"
+                className="font-medium text-orange-600 transition-colors hover:text-orange-700"
               >
                 gearbox assembly manufacturer
               </Link>
@@ -95,7 +95,7 @@ export default function HomePage() {
           <div className="mt-12 text-center">
             <Link
               href="/capabilities"
-              className="inline-flex items-center gap-2 font-heading text-sm font-semibold text-orange transition-colors hover:text-orange-300"
+              className="inline-flex items-center gap-2 font-heading text-sm font-semibold text-orange-600 transition-colors hover:text-orange-700"
             >
               Explore all capabilities →
             </Link>
@@ -103,7 +103,7 @@ export default function HomePage() {
               OEMs and importers:{" "}
               <Link
                 href="/oem-contract-manufacturing"
-                className="font-medium text-orange transition-colors hover:text-orange-300"
+                className="font-medium text-orange-600 transition-colors hover:text-orange-700"
               >
                 OEM &amp; contract manufacturing
               </Link>

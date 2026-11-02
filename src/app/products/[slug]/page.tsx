@@ -60,7 +60,7 @@ export function generateMetadata({ params }: Params): Metadata {
 const sectionHeadingClass =
   "font-heading text-2xl font-bold leading-tight text-navy sm:text-3xl";
 const eyebrowClass =
-  "mb-3 inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.2em] text-orange";
+  "mb-3 inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.2em] text-orange-600";
 
 export default function ProductDetailPage({ params }: Params) {
   const product = getProductBySlug(params.slug);
@@ -204,7 +204,7 @@ export default function ProductDetailPage({ params }: Params) {
               Need this part to a custom drawing or sample?{" "}
               <Link
                 href="/capabilities"
-                className="font-medium text-orange transition-colors hover:text-orange-300"
+                className="font-medium text-orange-600 transition-colors hover:text-orange-700"
               >
                 See our manufacturing capabilities
               </Link>
@@ -214,7 +214,7 @@ export default function ProductDetailPage({ params }: Params) {
               Explore our{" "}
               <Link
                 href={categoryHub.href}
-                className="font-medium text-orange transition-colors hover:text-orange-300"
+                className="font-medium text-orange-600 transition-colors hover:text-orange-700"
               >
                 {categoryHub.label}
               </Link>{" "}
