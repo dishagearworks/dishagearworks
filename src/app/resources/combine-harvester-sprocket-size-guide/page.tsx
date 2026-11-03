@@ -51,10 +51,10 @@ export default function Page() {
       <p>
         Count every tooth around the sprocket. The tooth count sets the gear
         ratio and the working diameter, so it must be exact. In the standard
-        pitches, sprockets commonly fall in the <strong>13 to 52 teeth</strong>{" "}
-        range depending on the position in the drive, and custom pitches can be
-        made to requirement. If the old sprocket is badly worn, count from a
-        matching part on the other side of the machine.
+        pitches these run <strong>13 to 52 teeth on 3/4 inch (19.05 mm)</strong>{" "}
+        and <strong>12 to 63 teeth on 5/8 inch (15.875 mm)</strong>, with custom
+        pitches made to requirement. If the old sprocket is badly worn, count
+        from a matching part on the other side of the machine.
       </p>
 
       <h3>3. Bore and keyway</h3>
@@ -63,8 +63,9 @@ export default function Page() {
         that locks the sprocket to the shaft so it cannot spin. Measure the
         shaft diameter and the key width. Bore options include a pilot bore,
         finished bores of 25, 30, 35, 40 or 45 mm, or a fully custom bore
-        machined to your drawing. Getting this wrong is the usual cause of a
-        sprocket that "fits but slips."
+        machined to your drawing — the bore that can be fitted depends on the
+        sprocket's tooth size and construction, so it is confirmed per part.
+        Getting this wrong is the usual cause of a sprocket that "fits but slips."
       </p>
 
       <h3>4. Hub style and overall width</h3>
@@ -96,10 +97,12 @@ export default function Page() {
       </ul>
       <p>
         With these in hand, a manufacturer can quote quickly and machine to your
-        requirement. DISHA GEARWORKS produces simplex sprockets in EN8, in
-        standard 5/8 inch and 3/4 inch pitches (13–52 teeth) with custom pitches
-        and bores to requirement, for combine harvesters and agricultural
-        machinery.
+        requirement. DISHA GEARWORKS produces simplex sprockets in EN8 — 3/4
+        inch (19.05 mm) with 13 to 52 teeth and 5/8 inch (15.875 mm) with 12 to
+        63 teeth, custom pitches to requirement — in five constructions: a plain
+        plate, or a round or square welded hub on one or both sides. The
+        available bore depends on the tooth size and construction and is
+        confirmed per part.
       </p>
       <p>
         Have the details ready?{" "}
