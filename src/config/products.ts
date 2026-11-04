@@ -33,6 +33,10 @@ export type Product = {
   fullDescription: string[];
   /** Technical specification rows. */
   specs: Spec[];
+  /** Optional sub-heading for the main specs table (used when a product has two distinct spec sets). */
+  specsHeading?: string;
+  /** Optional additional, clearly-separated spec blocks (e.g. distinct product lines on the same page). */
+  secondarySpecs?: { heading: string; intro?: string; specs: Spec[] }[];
   features: string[];
   applications: string[];
   /** Materials & manufacturing detail bullets. */
@@ -125,13 +129,13 @@ export const products: Product[] = [
     title: "Pulleys",
     heading: "Cast Iron Pulleys for Combine Harvesters and Agricultural Machinery",
     description:
-      "Machined and painted cast iron pulleys from 2.5 inch to 14 inch, available in V-belt, flat belt, multi-groove and timing pulley types.",
+      "Cast iron single-groove V-belt (2.5\"–14\" OD) and double-belt drive (3\"–9\" OD) pulleys, each with its own belt profiles and set bores. Also E-belt drive pulleys (10–16\" OD, taper bore), plus flat-belt and three-groove pulleys to drawing or sample.",
     image: "/images/products/pulleys.jpg",
     imageAlt:
       "Cast iron pulley for combine harvester manufactured by DISHA GEARWORKS in Punjab, India",
-    metaTitle: "Cast Iron Pulley Manufacturer for Agricultural Machinery | DISHA GEARWORKS",
+    metaTitle: "V-Belt Pulley Manufacturer – Single-Groove & Double-Belt | DISHA GEARWORKS",
     metaDescription:
-      "Cast iron pulleys from 2.5–14 inch with custom bore, keyway, machined and painted finish for agricultural machinery.",
+      "Cast iron V-belt pulleys: single-groove (2.5\"–14\" OD, A/B/C) and double-belt drive (3\"–9\" OD, B/C) lines, each with set bores. Also E-belt drive (10–16\", taper bore), flat-belt and three-groove pulleys.",
     keywords: [
       "pulley manufacturer India",
       "cast iron pulley manufacturer",
@@ -141,28 +145,59 @@ export const products: Product[] = [
     ],
     fullDescription: [
       "DISHA GEARWORKS manufactures cast iron pulleys for combine harvesters, tractor implements, threshers and general agricultural machinery applications. Pulleys are used for reliable belt-driven power transmission, and accurate machining is important for alignment, fitment and reduced vibration during operation.",
-      "The provided pulley range includes diameters from 2.5 inch to 14 inch. Pulley types can include V-belt, flat belt, multi-groove and timing pulley designs, with belt sections such as A, B, C and other sections reviewed as per requirement. Bore and keyway customization is available as per sample, drawing or machine application.",
-      "Pulleys are manufactured in cast iron and supplied with machined and painted finish. Balancing is available as part of the product capability, which helps support smoother operation in rotating applications. Each part is inspected before dispatch using standard and custom measuring tools where required.",
-      "DISHA GEARWORKS supplies OEMs, exporters and bulk buyers looking for agricultural machinery pulleys from Punjab, India. Buyers should share pulley type, belt section, outside diameter, bore/keyway details, sample photo or technical drawing for accurate manufacturing and quotation.",
+      "The standard single-groove catalogue covers single-groove V-belt pulleys. In outside diameters of 2.5, 3, 3.5, 4, 4.5 and 5 inches they are made in A and B belt profiles, with a pilot, 15 mm or 20 mm bore. In outside diameters of 6, 7, 8, 9, 10, 11, 12, 13 and 14 inches they are made in A, B and C belt profiles, with a pilot, 25, 30, 35, 40 or 45 mm bore. These outside-diameter, profile and bore options apply to single-groove pulleys; other pulley types are made to your drawing.",
+      "DISHA GEARWORKS also makes a separate line of double-belt drive pulleys, set out in the specifications below. Specifications and availability differ by pulley type; confirm the required dimensions and belt profile when enquiring.",
+      "Both the single-groove and double-belt drive pulleys are manufactured in cast iron and supplied with a machined and painted finish. Balancing is available to support smoother operation in rotating applications. Checks carried out include balancing, a bore-diameter check and a check of the finish.",
+      "DISHA GEARWORKS supplies OEMs, exporters and bulk buyers looking for agricultural machinery pulleys from Punjab, India. Hubs for both the single-groove and double-belt drive pulleys can be made to the customer's requirement. When requesting a quotation, confirm the pulley line (single-groove, double-belt or E-belt), the pulley size or sizes — both sizes for a double-belt pair — the belt profile, the bore, the hub requirement (with hub dimensions or a drawing) and the application, with a sample photo or drawing. For E-belt drive pulleys, provide your required diameter, taper details and balancing requirements.",
     ],
     specs: [
-      { label: "Product type", value: "V-belt, flat belt, multi-groove, timing and custom pulleys" },
-      { label: "Diameter range", value: "2.5 inch to 14 inch" },
-      { label: "Belt section", value: "A, B, C and other sections as per requirement" },
-      { label: "Bore / keyway", value: "Custom bore and keyway available" },
+      { label: "Product type", value: "Single-groove V-belt pulleys (standard catalogue); other types made to drawing" },
+      { label: "Standard outside diameters", value: "2.5, 3, 3.5, 4, 4.5, 5, 6, 7, 8, 9, 10, 11, 12, 13 and 14 inch" },
+      { label: "Belt profiles", value: "A and B on 2.5–5 inch; A, B and C on 6–14 inch" },
+      { label: "Bores — 2.5 to 5 inch", value: "Pilot, 15 mm or 20 mm" },
+      { label: "Bores — 6 to 14 inch", value: "Pilot, 25, 30, 35, 40 or 45 mm" },
       { label: "Material", value: "Cast iron" },
       { label: "Balancing", value: "Available" },
       { label: "Surface finish", value: "Machined and painted" },
-      { label: "Applications", value: "Combine harvesters, tractor implements, threshers and agricultural machines" },
-      { label: "Manufacturing basis", value: "As per sample, drawing and custom requirement" },
+      { label: "Hub", value: "Made to the customer's requirement — provide hub dimensions or a drawing" },
+      { label: "Manufacturing basis", value: "Standard single-groove catalogue, or as per sample / drawing" },
+    ],
+    specsHeading: "Single-groove V-belt pulleys",
+    secondarySpecs: [
+      {
+        heading: "Double-belt drive pulleys",
+        intro:
+          "A separate line from the single-groove pulleys above. Specifications and availability differ by pulley type; confirm the required dimensions and belt profile when enquiring. Pulley sizes are paired to the customer's requirement (for example, a 9-inch pulley with a 7-inch pulley).",
+        specs: [
+          { label: "Outside diameters", value: "3 to 9 inch in half-inch steps (3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7, 7.5, 8, 8.5 and 9 inch)" },
+          { label: "Belt profile B", value: "3 to 9 inch" },
+          { label: "Belt profile C", value: "4 to 9 inch" },
+          { label: "Bore options", value: "Pilot, 25, 30 or 35 mm" },
+          { label: "Material", value: "Cast iron" },
+          { label: "Surface finish", value: "Machined and painted" },
+          { label: "Balancing", value: "Available" },
+          { label: "Pairing", value: "Pulley sizes paired to the customer's requirement (for example, a 9-inch with a 7-inch)" },
+          { label: "Hub", value: "Made to the customer's requirement — provide hub dimensions or a drawing" },
+        ],
+      },
+      {
+        heading: "E-belt drive pulleys",
+        intro:
+          "A separate option from the single-groove and double-belt pulleys above. Specifications and availability differ by pulley type — provide your required diameter, taper details and balancing requirements when requesting a quotation.",
+        specs: [
+          { label: "Outside diameter", value: "10 to 16 inch (confirm your required diameter)" },
+          { label: "Bore", value: "Taper bore — provide your taper details" },
+          { label: "Balancing", value: "Available on request" },
+        ],
+      },
     ],
     features: [
-      "2.5 inch to 14 inch diameter range",
-      "Cast iron construction",
-      "Custom bore and keyway options",
-      "Machined and painted finish",
-      "Balancing available",
-      "Suitable for OEM / export bulk requirements",
+      "Single-groove V-belt pulleys, 2.5\" to 14\" OD",
+      "Profiles A & B on 2.5–5\"; A, B & C on 6–14\"",
+      "Bores (2.5–5\"): pilot, 15 or 20 mm",
+      "Bores (6–14\"): pilot, 25, 30, 35, 40 or 45 mm",
+      "Cast iron, machined and painted; balancing available",
+      "Other pulley types made to your drawing",
     ],
     applications: [
       "Combine harvester belt drive systems",
@@ -172,24 +207,27 @@ export const products: Product[] = [
       "OEM and replacement pulley supply",
     ],
     materials: [
-      "Cast iron pulley manufacturing",
+      "Cast iron — both the single-groove and double-belt pulleys",
       "Machined finish and painted finish",
       "Balancing available",
       "Bore/keyway machining as per requirement",
-      "Inspection before dispatch",
+      "Checks: balancing, bore diameter and finish",
     ],
     customManufacturing:
-      "Custom pulleys can be manufactured as per sample, drawing, belt section, diameter, groove profile, bore and keyway details. Buyers should share sample photos or measurement details for faster quotation.",
+      "Flat-belt and three-groove pulleys are also manufactured, including to your drawing or sample. Sizes beyond the standard single-groove and double-belt ranges are made to your sample or drawing, to the belt profile, outside diameter, groove count, bore and keyway you need. Share a sample photo or measurements for a faster quotation.",
     faqs: [
-      { q: "What types of pulleys do you manufacture?", a: "V-belt, flat belt, multi-groove, timing and custom pulleys can be manufactured as per requirement." },
-      { q: "What pulley diameter range is available?", a: "The provided diameter range is 2.5 inch to 14 inch." },
-      { q: "Which material is used?", a: "Cast iron is used for the pulleys as provided." },
-      { q: "Can bore and keyway be customized?", a: "Yes. Bore and keyway can be manufactured as per sample or drawing." },
+      { q: "What types of pulleys do you manufacture?", a: "Single-groove V-belt, double-belt drive and E-belt drive pulleys, plus flat-belt and three-groove pulleys. Flat-belt and three-groove pulleys can also be made to your drawing or sample." },
+      { q: "What single-groove outside diameters and belt profiles are available?", a: "Single-groove pulleys from 2.5 to 5 inch come in A and B profiles; 6 to 14 inch come in A, B and C profiles." },
+      { q: "What single-groove bore options are there?", a: "On 2.5 to 5 inch pulleys: a pilot, 15 mm or 20 mm bore. On 6 to 14 inch pulleys: a pilot, 25, 30, 35, 40 or 45 mm bore. These are the set bore choices for single-groove pulleys." },
+      { q: "Do you make double-belt drive pulleys?", a: "Yes, as a separate line. They come in outside diameters from 3 to 9 inch (in half-inch steps), in B profile (3 to 9 inch) and C profile (4 to 9 inch), with a pilot, 25, 30 or 35 mm bore. Sizes are paired to your requirement — for example a 9-inch with a 7-inch. Specifications and availability differ by pulley type; confirm the required dimensions and belt profile when enquiring." },
+      { q: "Do you make E-belt drive pulleys?", a: "Yes, as a separate option, in outside diameters from 10 to 16 inch with a taper bore; balancing is available on request. Provide your required diameter, taper details and balancing requirements when you enquire." },
+      { q: "Which material is used?", a: "Both the single-groove and double-belt drive pulleys are made in cast iron." },
       { q: "Are pulleys balanced?", a: "Balancing is available as per the product requirement." },
+      { q: "Can the hub be made to our requirement?", a: "Yes. Hubs for both the single-groove and double-belt drive pulleys are made to the customer's requirement — send the hub dimensions or a drawing when you enquire." },
     ],
     related: ["sprockets", "shafts", "hubs", "custom-cnc-components", "combine-harvester-components"],
     ctaText:
-      "Send pulley diameter, belt section, bore/keyway details or product photo to get a quote from DISHA GEARWORKS.",
+      "Need pulleys in bulk? Confirm the pulley line (single-groove, double-belt or E-belt), the pulley size or sizes, belt profile, bore, hub (with dimensions or a drawing) and application — for E-belt, the diameter, taper details and balancing — or send a sample or drawing, and DISHA GEARWORKS will send a quotation.",
   },
   {
     slug: "bearing-housings",

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Fragment } from "react";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { PageBanner } from "@/components/PageBanner";
@@ -61,6 +62,29 @@ const sectionHeadingClass =
   "font-heading text-2xl font-bold leading-tight text-navy sm:text-3xl";
 const eyebrowClass =
   "mb-3 inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.2em] text-orange-600";
+
+/** Responsive spec table (shared by the main and any secondary spec block). */
+function SpecTable({ rows }: { rows: { label: string; value: string }[] }) {
+  return (
+    <div className="overflow-x-auto">
+      <table className="w-full border-collapse text-left text-sm">
+        <tbody>
+          {rows.map((row, i) => (
+            <tr key={row.label} className={i % 2 ? "bg-steel-light/40" : "bg-white"}>
+              <th
+                scope="row"
+                className="w-2/5 px-5 py-3.5 align-top font-heading font-semibold text-navy"
+              >
+                {row.label}
+              </th>
+              <td className="px-5 py-3.5 align-top text-slate-600">{row.value}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
 
 export default function ProductDetailPage({ params }: Params) {
   const product = getProductBySlug(params.slug);
@@ -233,30 +257,34 @@ export default function ProductDetailPage({ params }: Params) {
           <h2 id="specs-heading" className={sectionHeadingClass}>
             Specifications
           </h2>
-          <FadeIn className="mt-8 overflow-hidden rounded-2xl border border-navy/10 bg-white shadow-card">
-            <div className="overflow-x-auto">
-              <table className="w-full border-collapse text-left text-sm">
-                <tbody>
-                  {product.specs.map((row, i) => (
-                    <tr
-                      key={row.label}
-                      className={i % 2 ? "bg-steel-light/40" : "bg-white"}
-                    >
-                      <th
-                        scope="row"
-                        className="w-2/5 px-5 py-3.5 align-top font-heading font-semibold text-navy"
-                      >
-                        {row.label}
-                      </th>
-                      <td className="px-5 py-3.5 align-top text-slate-600">
-                        {row.value}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+          {product.specsHeading && (
+            <h3 className="mt-8 font-heading text-lg font-semibold text-navy">
+              {product.specsHeading}
+            </h3>
+          )}
+          <FadeIn
+            className={`${
+              product.specsHeading ? "mt-4" : "mt-8"
+            } overflow-hidden rounded-2xl border border-navy/10 bg-white shadow-card`}
+          >
+            <SpecTable rows={product.specs} />
           </FadeIn>
+
+          {product.secondarySpecs?.map((block) => (
+            <Fragment key={block.heading}>
+              <h3 className="mt-10 font-heading text-lg font-semibold text-navy">
+                {block.heading}
+              </h3>
+              {block.intro && (
+                <p className="mt-2 max-w-3xl text-sm leading-relaxed text-slate-600">
+                  {block.intro}
+                </p>
+              )}
+              <FadeIn className="mt-4 overflow-hidden rounded-2xl border border-navy/10 bg-white shadow-card">
+                <SpecTable rows={block.specs} />
+              </FadeIn>
+            </Fragment>
+          ))}
         </div>
       </section>
 
