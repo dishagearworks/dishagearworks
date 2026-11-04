@@ -516,13 +516,13 @@ export const products: Product[] = [
     title: "Shafts",
     heading: "CNC Machined Shafts for Combine Harvesters and Tractors",
     description:
-      "EN8 shafts for combine harvesters and tractors, manufactured from 30 mm to 60 mm diameter and up to 6 feet length with turning, grinding, keyway, slotting and threading options.",
+      "EN8 shafts for combine harvesters and tractors, manufactured from 30 mm to 60 mm diameter and up to 6 feet length with turning, grinding, keyway, slotting and threading options. EN15 axle shafts (42 mm, 16 splines, 10–37 inch) are also made.",
     image: "/images/products/shafts.png",
     imageAlt:
       "EN8 CNC machined shaft for combine harvester and tractor by DISHA GEARWORKS, Punjab India",
     metaTitle: "EN8 Shaft Manufacturer for Combine Harvesters & Tractors | DISHA GEARWORKS",
     metaDescription:
-      "EN8 shafts from 30–60 mm diameter and up to 6 ft length with CNC turning, grinding, keyway and threading options.",
+      "EN8 shafts from 30–60 mm diameter and up to 6 ft length with CNC turning, grinding, keyway and threading options. Plus EN15 axle shafts — 42 mm, 16 splines, 10–37 in.",
     keywords: [
       "EN8 shaft manufacturer",
       "combine harvester shaft",
@@ -545,6 +545,20 @@ export const products: Product[] = [
       { label: "Heat treatment", value: "Reviewed as per component requirement" },
       { label: "Manufacturing basis", value: "As per sample, drawing and custom requirement" },
       { label: "Inspection", value: "Vernier, micrometer, bore gauge, height gauge and custom gauges where required" },
+    ],
+    specsHeading: "Machined shafts (EN8)",
+    secondarySpecs: [
+      {
+        heading: "Axle shafts (EN15)",
+        intro:
+          "A separate line of axle shafts in EN15. The confirmed specifications are below — send your required length, with a sample or drawing, for a quotation.",
+        specs: [
+          { label: "Length range", value: "10 to 37 inch" },
+          { label: "Axle diameter", value: "42 mm" },
+          { label: "Splines", value: "16" },
+          { label: "Material", value: "EN15" },
+        ],
+      },
     ],
     features: [
       "30 mm to 60 mm diameter range",
@@ -575,6 +589,7 @@ export const products: Product[] = [
       { q: "Is grinding available?", a: "Yes. Both CNC turning and grinding are available." },
       { q: "Can you make keyway and threading?", a: "Yes. Keyway, threading, slotting and drilling are available as per requirement." },
       { q: "Can shafts be made from a sample?", a: "Yes. Shafts can be manufactured as per sample and drawing." },
+      { q: "Do you make axle shafts?", a: "Yes. Axle shafts are made in EN15, with a 42 mm axle diameter, 16 splines and a length range of 10 to 37 inches. Send your required length, with a sample or drawing, for a quotation." },
     ],
     related: ["sprockets", "pulleys", "hubs", "bearing-housings", "custom-cnc-components"],
     ctaText:
