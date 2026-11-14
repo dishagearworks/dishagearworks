@@ -288,6 +288,72 @@ export default function ProductDetailPage({ params }: Params) {
         </div>
       </section>
 
+      {/* ── References (e.g. bearing numbers a housing is designed for) ─── */}
+      {product.references && (
+        <section className="bg-white py-16 sm:py-20" aria-labelledby="references-heading">
+          <div className="container-x">
+            <span className={eyebrowClass}>
+              <span className="h-px w-6 bg-orange" /> References
+            </span>
+            <h2 id="references-heading" className={sectionHeadingClass}>
+              {product.references.heading}
+            </h2>
+            {product.references.intro && (
+              <p className="mt-4 max-w-3xl text-base leading-relaxed text-slate-600">
+                {product.references.intro}
+              </p>
+            )}
+            <FadeIn className="mt-8 rounded-2xl border border-navy/10 bg-steel-light/40 p-5 sm:p-7">
+              <ul className="grid grid-cols-3 gap-2.5 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8">
+                {product.references.items.map((n) => (
+                  <li
+                    key={n}
+                    className="rounded-md bg-white px-2 py-2 text-center font-mono text-sm text-navy shadow-card"
+                  >
+                    {n}
+                  </li>
+                ))}
+              </ul>
+            </FadeIn>
+
+            {(product.references.sendItems || product.references.note) && (
+              <div className="mt-10 grid items-start gap-10 lg:grid-cols-2">
+                <div>
+                  {product.references.sendItems && (
+                    <>
+                      <h3 className="font-heading text-lg font-semibold text-navy">
+                        When you enquire, please send
+                      </h3>
+                      <ul className="mt-4 grid gap-3">
+                        {product.references.sendItems.map((s) => (
+                          <li key={s} className="flex items-start gap-2.5 text-sm text-navy">
+                            <CheckIcon className="mt-0.5 h-4 w-4 shrink-0 text-orange" />
+                            {s}
+                          </li>
+                        ))}
+                      </ul>
+                    </>
+                  )}
+                  {product.references.note && (
+                    <p className="mt-4 text-sm leading-relaxed text-slate-600">
+                      {product.references.note}
+                    </p>
+                  )}
+                </div>
+                <div className="flex flex-wrap gap-4 lg:justify-end">
+                  <QuoteButton href={quoteHref} size="lg">
+                    Request a Quote
+                  </QuoteButton>
+                  <WhatsAppButton size="lg" message={waMessage} number={waNumber}>
+                    Send on WhatsApp
+                  </WhatsAppButton>
+                </div>
+              </div>
+            )}
+          </div>
+        </section>
+      )}
+
       {/* ── Key Features + Applications ────────────────────────────────── */}
       <section className="bg-white py-16 sm:py-20">
         <div className="container-x grid gap-12 lg:grid-cols-2">

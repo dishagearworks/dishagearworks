@@ -42,8 +42,8 @@ export const siteConfig = {
   // WhatsApp click-to-chat (conversion). Numbers are digits only (wa.me form).
   whatsapp: {
     number: "916283011490",
-    // Dedicated number for product enquiries / quotations.
-    productNumber: "919814042006",
+    // All WhatsApp enquiries (general and product/quotation) use the same number.
+    productNumber: "916283011490",
     defaultMessage:
       "Hello DISHA GEARWORKS, I need a quotation for agricultural machinery spare parts. I have a sample/drawing/photo. Please guide me.",
   },

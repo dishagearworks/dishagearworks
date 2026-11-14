@@ -37,6 +37,18 @@ export type Product = {
   specsHeading?: string;
   /** Optional additional, clearly-separated spec blocks (e.g. distinct product lines on the same page). */
   secondarySpecs?: { heading: string; intro?: string; specs: Spec[] }[];
+  /**
+   * Optional reference list, e.g. the bearing numbers a housing is designed for.
+   * These are reference numbers only — NOT DISHA GEARWORKS part numbers, and not
+   * tied to any specific application or machine.
+   */
+  references?: {
+    heading: string;
+    intro?: string;
+    items: string[];
+    sendItems?: string[];
+    note?: string;
+  };
   features: string[];
   applications: string[];
   /** Materials & manufacturing detail bullets. */
@@ -232,15 +244,15 @@ export const products: Product[] = [
   {
     slug: "bearing-housings",
     title: "Bearing Housings",
-    heading: "Bearing Housings for Combine Harvesters and Tractors",
+    heading: "Bearing Housing Manufacturer for Combine Harvesters and Tractors",
     description:
       "Custom bearing housings for combine harvesters and tractors, including flange, cast and machined housings with machined bearing seats and painted finish.",
     image: "/images/products/bearing-housings.jpg",
     imageAlt:
       "Custom machined bearing housing for combine harvester manufactured by DISHA GEARWORKS, Punjab India",
-    metaTitle: "Bearing Housing Manufacturer for Combine Harvesters | DISHA GEARWORKS",
+    metaTitle: "Bearing Housing Manufacturer, India — Combine & Tractor | DISHA GEARWORKS",
     metaDescription:
-      "Bearing housings for combine harvesters and tractors with machined seats, custom fitment, CI/MS/alloy steel and painted finish.",
+      "Bearing housing manufacturer in Punjab, India — flange, cast and machined housings for combine harvesters and tractors, made to your drawing, sample or bearing number. Export enquiries welcome.",
     keywords: [
       "bearing housing manufacturer",
       "combine harvester bearing housing",
@@ -264,6 +276,22 @@ export const products: Product[] = [
       { label: "Surface finish", value: "Machined finish and painted finish" },
       { label: "Manufacturing basis", value: "As per sample, drawing and custom requirement" },
     ],
+    references: {
+      heading: "Bearing Housings for the Following Bearing Numbers",
+      intro:
+        "We manufacture bearing housings for the bearing numbers listed below. Housing designs and mounting arrangements can vary for the same bearing number. Please share a drawing, sample, photographs or dimensions so we can confirm the housing you need.",
+      items: [
+        "6214", "6307", "6208", "6309", "1888180", "6215", "6211", "2210", "6310",
+        "6308", "22218", "32208", "32210", "6205", "6204", "6207", "6206", "6311", "6312",
+      ],
+      sendItems: [
+        "The bearing number",
+        "Required quantity",
+        "A drawing, sample or clear photographs",
+        "Housing dimensions and mounting details, if available",
+      ],
+      note: "We can also review your drawing or sample for custom bearing-housing requirements.",
+    },
     features: [
       "Custom bearing housing manufacturing",
       "Flange, cast and machined housing options",
