@@ -7,6 +7,7 @@ import { ProductCard } from "@/components/ProductCard";
 import { SectionHeading } from "@/components/SectionHeading";
 import { CTASection } from "@/components/CTASection";
 import { SmartImage } from "@/components/PlaceholderImage";
+import { ProductGallery } from "@/components/ProductGallery";
 import { QuoteButton } from "@/components/QuoteButton";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { SampleDrawingCTA } from "@/components/SampleDrawingCTA";
@@ -173,14 +174,28 @@ export default function ProductDetailPage({ params }: Params) {
       {/* ── Overview: image + description + CTAs ───────────────────────── */}
       <section className="bg-white py-16 sm:py-20" aria-labelledby="overview-heading">
         <div className="container-x grid items-start gap-12 lg:grid-cols-2">
-          <div className="overflow-hidden rounded-3xl border border-navy/10 shadow-card lg:sticky lg:top-28">
-            <SmartImage
-              src={product.image}
-              alt={product.imageAlt}
-              label={product.title}
-              ratio="aspect-[4/3]"
-              sizes="(max-width: 1024px) 100vw, 50vw"
-            />
+          <div className="lg:sticky lg:top-28">
+            {product.images && product.images.length > 0 ? (
+              <ProductGallery
+                title={product.title}
+                contain={product.imageContain}
+                views={[
+                  { src: product.image, alt: product.imageAlt },
+                  ...product.images,
+                ]}
+              />
+            ) : (
+              <div className="overflow-hidden rounded-3xl border border-navy/10 shadow-card">
+                <SmartImage
+                  src={product.image}
+                  alt={product.imageAlt}
+                  label={product.title}
+                  ratio="aspect-[4/3]"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  contain={product.imageContain}
+                />
+              </div>
+            )}
           </div>
 
           <div>
@@ -293,7 +308,8 @@ export default function ProductDetailPage({ params }: Params) {
         <section className="bg-white py-16 sm:py-20" aria-labelledby="references-heading">
           <div className="container-x">
             <span className={eyebrowClass}>
-              <span className="h-px w-6 bg-orange" /> References
+              <span className="h-px w-6 bg-orange" />{" "}
+              {product.references.eyebrow ?? "References"}
             </span>
             <h2 id="references-heading" className={sectionHeadingClass}>
               {product.references.heading}
@@ -303,18 +319,20 @@ export default function ProductDetailPage({ params }: Params) {
                 {product.references.intro}
               </p>
             )}
-            <FadeIn className="mt-8 rounded-2xl border border-navy/10 bg-steel-light/40 p-5 sm:p-7">
-              <ul className="grid grid-cols-3 gap-2.5 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8">
-                {product.references.items.map((n) => (
-                  <li
-                    key={n}
-                    className="rounded-md bg-white px-2 py-2 text-center font-mono text-sm text-navy shadow-card"
-                  >
-                    {n}
-                  </li>
-                ))}
-              </ul>
-            </FadeIn>
+            {product.references.items && product.references.items.length > 0 && (
+              <FadeIn className="mt-8 rounded-2xl border border-navy/10 bg-steel-light/40 p-5 sm:p-7">
+                <ul className="grid grid-cols-3 gap-2.5 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8">
+                  {product.references.items.map((n) => (
+                    <li
+                      key={n}
+                      className="rounded-md bg-white px-2 py-2 text-center font-mono text-sm text-navy shadow-card"
+                    >
+                      {n}
+                    </li>
+                  ))}
+                </ul>
+              </FadeIn>
+            )}
 
             {(product.references.sendItems || product.references.note) && (
               <div className="mt-10 grid items-start gap-10 lg:grid-cols-2">
@@ -434,6 +452,38 @@ export default function ProductDetailPage({ params }: Params) {
           </div>
         </div>
       </section>
+
+      {/* ── Quality Checks (optional) ──────────────────────────────────── */}
+      {product.qualityChecks && product.qualityChecks.length > 0 && (
+        <section className="bg-white py-16 sm:py-20" aria-labelledby="quality-heading">
+          <div className="container-x">
+            <span className={eyebrowClass}>
+              <span className="h-px w-6 bg-orange" /> Quality Checks
+            </span>
+            <h2 id="quality-heading" className={sectionHeadingClass}>
+              Quality checks
+            </h2>
+            <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:gap-6">
+              {product.qualityChecks.map((c) => (
+                <div
+                  key={c.label}
+                  className="flex items-start gap-3 rounded-2xl border border-navy/10 bg-steel-light/40 p-5 sm:p-6"
+                >
+                  <CheckIcon className="mt-0.5 h-5 w-5 shrink-0 text-orange" />
+                  <div>
+                    <h3 className="font-heading text-base font-semibold text-navy">
+                      {c.label}
+                    </h3>
+                    <p className="mt-1 text-sm leading-relaxed text-slate-600">
+                      {c.text}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* ── FAQs ───────────────────────────────────────────────────────── */}
       <section className="bg-white py-16 sm:py-20" aria-labelledby="faq-heading">

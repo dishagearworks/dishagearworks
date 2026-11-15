@@ -13,6 +13,12 @@ type PlaceholderImageProps = {
   sizes?: string;
   /** mark the first/above-the-fold instance as priority (skips lazy-load). */
   priority?: boolean;
+  /**
+   * For background-removed / transparent product images: use object-contain on a
+   * light backdrop so the whole product shows at its true proportions (no crop).
+   * Photographic images keep the default object-cover fill.
+   */
+  contain?: boolean;
 };
 
 /**
@@ -28,9 +34,14 @@ export function SmartImage({
   ratio = "aspect-[4/3]",
   sizes = "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw",
   priority = false,
+  contain = false,
 }: PlaceholderImageProps) {
   return (
-    <div className={`relative w-full overflow-hidden ${ratio} ${className}`}>
+    <div
+      className={`relative w-full overflow-hidden ${ratio} ${
+        contain ? "bg-steel-light/60" : ""
+      } ${className}`}
+    >
       {src ? (
         <Image
           src={src}
@@ -38,7 +49,7 @@ export function SmartImage({
           fill
           sizes={sizes}
           priority={priority}
-          className="object-cover"
+          className={contain ? "object-contain p-3 sm:p-4" : "object-cover"}
         />
       ) : (
         <div className="blueprint absolute inset-0 flex flex-col items-center justify-center text-center">

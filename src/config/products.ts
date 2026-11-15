@@ -25,6 +25,10 @@ export type Product = {
   image: string;
   /** Descriptive alt text for the product image. */
   imageAlt: string;
+  /** For transparent / background-removed images: show contained (no crop). */
+  imageContain?: boolean;
+  /** Optional additional product views (same product, different angles). */
+  images?: { src: string; alt: string }[];
   /** SEO meta. */
   metaTitle: string;
   metaDescription: string;
@@ -43,12 +47,17 @@ export type Product = {
    * tied to any specific application or machine.
    */
   references?: {
+    /** small label above the heading; defaults to "References". */
+    eyebrow?: string;
     heading: string;
     intro?: string;
-    items: string[];
+    /** optional grid of reference numbers/codes (omit for a plain enquiry block). */
+    items?: string[];
     sendItems?: string[];
     note?: string;
   };
+  /** Optional "Quality Checks" section — confirmed checks only, no invented claims. */
+  qualityChecks?: { label: string; text: string }[];
   features: string[];
   applications: string[];
   /** Materials & manufacturing detail bullets. */
@@ -540,6 +549,98 @@ export const products: Product[] = [
       "Need a reduction body assembly or body-only supply? Send your sample/photo and request a quote from DISHA GEARWORKS.",
   },
   {
+    slug: "speed-changer",
+    title: "Speed Changer",
+    heading: "Speed Changer Manufacturer for Combine Harvesters",
+    description:
+      "Cast iron speed changer for combine harvesters — available as a complete assembly or as individual parts. One main size and variant; minor changes may apply to suit your machine.",
+    image: "/images/products/speed-changer.webp",
+    imageContain: true,
+    imageAlt:
+      "Cast iron combine harvester speed changer manufactured by DISHA GEARWORKS, Punjab India — front view",
+    images: [
+      {
+        src: "/images/products/speed-changer-angled.webp",
+        alt: "Combine harvester speed changer by DISHA GEARWORKS — angled view",
+      },
+      {
+        src: "/images/products/speed-changer-side.webp",
+        alt: "Combine harvester speed changer by DISHA GEARWORKS — side view",
+      },
+    ],
+    metaTitle: "Combine Harvester Speed Changer Manufacturer, India | DISHA GEARWORKS",
+    metaDescription:
+      "DISHA GEARWORKS manufactures cast iron speed changers for combine harvesters in Punjab, India — complete assemblies and individual parts. One main size and variant; share your machine details to confirm the configuration.",
+    keywords: [
+      "combine harvester speed changer",
+      "speed changer manufacturer",
+      "speed changer parts",
+      "combine harvester speed changer manufacturer India",
+      "speed changer Punjab",
+    ],
+    fullDescription: [
+      "DISHA GEARWORKS manufactures speed changers for combine harvesters. The unit is supplied as a complete speed changer assembly, and individual speed changer parts are also available.",
+      "The speed changer is made in cast iron. We manufacture one main size and variant. Minor changes may be required depending on the machine, so please share your requirements and we will confirm the right configuration.",
+      "When enquiring, tell us whether you need a complete assembly or an individual part, along with your machine details and quantity. A photograph, sample or drawing, where available, helps us confirm the configuration or the part you need.",
+    ],
+    specs: [
+      { label: "Product type", value: "Speed changer — complete assembly or individual parts" },
+      { label: "Material", value: "Cast iron" },
+      { label: "Range", value: "One main size and variant (minor changes to suit the machine)" },
+      { label: "Supply", value: "Complete assembly and individual speed changer parts" },
+      { label: "Manufacturing basis", value: "As per machine requirement, sample or drawing" },
+    ],
+    references: {
+      eyebrow: "Enquiries",
+      heading: "Speed Changer Enquiries",
+      intro:
+        "We supply the complete speed changer assembly as well as individual speed changer parts. We manufacture one main size and variant; minor changes may be required depending on the machine, so please share your requirements so we can confirm the right configuration.",
+      sendItems: [
+        "Whether you need a complete assembly or an individual part",
+        "Your machine details and the quantity required",
+        "A photograph, sample or drawing, where available, to help confirm the configuration or part",
+      ],
+      note: "Share your details and we will confirm the complete assembly or the individual part that suits your machine.",
+    },
+    qualityChecks: [
+      { label: "Component balancing", text: "The two outer pulley faces and the centre impeller are individually balanced on dedicated balancing equipment before assembly." },
+      { label: "Bearing fit", text: "The bearing fit is checked with appropriate equipment before assembly." },
+      { label: "Greasing", text: "Components are properly greased during assembly." },
+      { label: "Dimensional checks", text: "Important dimensions are checked." },
+      { label: "Assembly check", text: "Components are checked for correct fitment." },
+      { label: "Visual & finish checks", text: "The product is checked for visible defects and finish." },
+    ],
+    features: [
+      "Complete speed changer assembly",
+      "Individual speed changer parts available",
+      "Cast iron construction",
+      "One main size and variant",
+      "Minor changes to suit your machine",
+      "Made to your machine requirement, sample or drawing",
+    ],
+    applications: [
+      "Combine harvesters",
+      "OEM supply",
+      "Replacement and spare-part supply",
+    ],
+    materials: [
+      "Cast iron",
+      "Supplied as a complete assembly or as individual parts",
+      "Made to your machine requirement, sample or drawing",
+    ],
+    customManufacturing:
+      "We manufacture one main size and variant. Minor changes may be required depending on the machine, so share your machine details and a photograph, sample or drawing, and we will confirm the complete assembly or the individual part you need.",
+    faqs: [
+      { q: "Do you sell the complete speed changer or individual parts?", a: "Both. DISHA GEARWORKS supplies the complete speed changer assembly and individual speed changer parts." },
+      { q: "What material is the speed changer made from?", a: "Cast iron." },
+      { q: "Do you make different sizes?", a: "We manufacture one main size and variant. Minor changes may be required depending on the machine, so please share your requirements to confirm the configuration." },
+      { q: "What should I send for a quotation?", a: "Let us know whether you need a complete assembly or an individual part, your machine details and quantity, and send a photograph, sample or drawing where available." },
+    ],
+    related: ["pulleys", "shafts", "bearing-housings", "combine-harvester-components", "custom-cnc-components"],
+    ctaText:
+      "Need a speed changer or a speed changer part? Tell us your machine details and quantity, and send a photo, sample or drawing — DISHA GEARWORKS will send a quotation.",
+  },
+  {
     slug: "shafts",
     title: "Shafts",
     heading: "CNC Machined Shafts for Combine Harvesters and Tractors",
@@ -965,7 +1066,7 @@ export const products: Product[] = [
       { q: "Which buyers do you serve?", a: "OEMs, exporters, dealers, farmers and replacement market buyers." },
       { q: "Which materials are used?", a: "EN8, cast iron and mild steel are commonly used as per component requirement." },
     ],
-    related: ["5-speed-gdr-gearbox-assembly", "4-speed-gdr-gearbox-assembly", "sprockets", "pulleys", "shafts", "custom-cnc-components"],
+    related: ["speed-changer", "5-speed-gdr-gearbox-assembly", "4-speed-gdr-gearbox-assembly", "sprockets", "pulleys", "shafts", "custom-cnc-components"],
     ctaText:
       "Need combine harvester spare parts or complete assemblies? Send your sample, drawing or product photo to DISHA GEARWORKS for quotation.",
   },
